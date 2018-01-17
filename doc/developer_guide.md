@@ -70,6 +70,20 @@ If an extension wants to alter the web page no file other than content.js has ac
 Manifest Responsibilities
 --------------------
 Manifest file is in JSON format. Using manifest.json we specify basic metadata about extension such as the name and version, and can also specify aspects of extension's functionality, such as background scripts, content scripts, and browser actions, permissions like tabs as background can access the tab data to alter its content. It will ask for the permissions of **activeTab** to fetch the current tab data.
+1. **"background"**: {
+    "persistent": true,
+    "scripts": ["jquery-2.2.0.min.js","background.js"]
+  },
+2.  **"browser_action"**: {
+    "default_title": "AAA Extension"
+  },
+3.  **"content_scripts"**: [{
+    "matches": ["<all_urls>"],
+    "js": ["jquery-2.2.0.min.js","content.js"]
+  }],
+4. **"permissions"**: ["activeTab"]
+
+We need to define that which page will act as background and also if it depends on any library we need to mention that in script. A content script to declare which file will act as content, and the permission that are required by the extension.
  
 
 Chrome Buttons/Actions
