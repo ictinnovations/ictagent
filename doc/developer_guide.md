@@ -23,6 +23,7 @@ Popup.html has several divs which will be displayed depending on their condition
 
 **Screen Normal**  
 Its the very first screen that appears when the user clicks on the browser action i.e on the icon of the extension in toolbar.It has calling functionality. User can dial any number from this screen. (div#screennormal)
+It has two buttons that change the status of agent.Status Online and offline.(button#onlinebtn) and (button#offlinebtn).   
 
 **Screen Dialing**  
 This screen appears when a user dials a number and clicks on the call button.It has an end call button.(div#screendialing)|
@@ -34,7 +35,7 @@ When the inbound calls come this screen appears , it will have a feature of answ
 This screen will be displayed when an inbound call is answered .It has Reject, Transfer,Send DTMF buttons. (div#screencalling)
 
 ### Popup.js
-Popup is a javascript file that has been integrated with the popup.html. All the buttons in html file perform some task and instructions of carrying that task is given in popup.js.In this case it has all the call related functions like accept ,reject, end,transfer, and send  DTMF.
+Popup is a javascript file that has been integrated with the popup.html. All the buttons in html file perform some task and instructions of carrying that task is given in popup.js.In this case it has all the call related functions like accept ,reject, end,transfer,send  DTMF and the status of the agent.
 
 **Functions**  
 
@@ -45,6 +46,7 @@ Popup is a javascript file that has been integrated with the popup.html. All the
 5. Transfer
 6. SendDTMF
 7. Chrome.runtime.onMessage.addListener which listens to the value sent as message by background stores the value and passes that value to the call function as an argument, which dials the number.
+8. Status function executes when this button is clicked. It dials a number which enables the agent to accept the incoming calls, and if he clicks the offline , he is unable to accept the incoming calls.
 
 ---
 
