@@ -45,7 +45,7 @@ Popup is a javascript file that has been integrated with the popup.html. All the
 5. Transfer
 6. SendDTMF
 7. Chrome.runtime.onMessage.addListener which listens to the value sent as message by background stores the value and passes that value to the call function as an argument, which dials the number.
-
+8. It gets the value of **contact load Url** from chrome storage and stores it in a global variable for further processing.
 ---
 
 Background responsibilities and functions
@@ -56,16 +56,21 @@ Background is a javascript file that has the code which controls the behaviour o
 1. chrome.tabs.onUpdated.addListener has function getTab() which gets the tab id of current web page and sends the messaeg to content script. 
 2. Browser action has a function launchApplication() which monitors that if window is open it prevents more windows from opening , and if no window is open it opens a new window. 
 3. chrome.extension.onRequest.addListener listens to the message sent by the content which is the number to be called. It takes the number, stores it and sends the request to the popup and sends the number as an argument.
-
+4. It creates the menu for the user i.e Default, settings and Search phone number.
+5. It creates the extension menu with the following command **chrome.contextMenus.create** and whenever user clicks the menu it triggers an onclick event.
+6. It takes the value of the checkbox search phone number from the storage and stores it in global variable **searchit**.
+7. It has a function **Chrome.tabs.OnUpdated** listener which is executed when the tab is updated and gets the tab Id and send the message to the content script to search phone numbers on the current tab, if the value of the **searchit** is 1.
+8. It takes the value of the checkbox autoload widget popup and executes the function to load it if and only if the value of checkbox is greater than 1.
 
 Content Responsibilites
 --------------------
 If an extension wants to alter the web page no file other than content.js has access for altering this page.It can interact with background.js through message passing.
 
 ### Functions
-1. Chrome.runtime.sendMessage.addListener which listens to the message sent by the background and executes the functions which executes the functions and replaces the number with a clickable links.
-2. Onclicking the link it will take the value and will save it in variable.
-3. Chrome.extension.sendRequest sends the stored value as an argument to the background.
+1. It gets the value of regex from the storage and matches the number with that particular regex.
+2. Chrome.runtime.sendMessage.addListener which listens to the message sent by the background and executes the functions which executes the  functions and replaces the number with a clickable links.
+3. Onclicking the link it will take the value and will save it in variable.
+4. Chrome.extension.sendRequest sends the stored value as an argument to the background.
 
 Manifest Responsibilities
 --------------------
@@ -81,27 +86,89 @@ Manifest file is in JSON format. Using manifest.json we specify basic metadata a
     "matches": ["<all_urls>"],
     "js": ["jquery-2.2.0.min.js","content.js"]
   }],
-4. **"permissions"**: ["activeTab"]
+4. **"permissions"**: ["activeTab", "storage"]
 
 We need to define that which page will act as background and also if it depends on any library we need to mention that in script. A content script to declare which file will act as content, and the permission that are required by the extension.
- 
+
+Options Responsibilities
+-----------------------
+This is a setting page which detects the settings and saves them in the **Chrome Storage**. It asks for the following parametes from the user:
+**Api Server**
+  * Username
+  * Password
+  * Url
+  * Test button
+**Agent**
+  * Get the Extenison
+  * Reload Button
+  * Auto load checkbox
+**Phone numbers**
+  * Search Phone on new tabs
+  * Phone pattern
+**Contact Load**
+  * Contact Load Url
+
+### Functions
+1. When user enters the url it has onChange listener which gets the value of url and authenticate user with that url.
+2. When user leaves the username field it takes its value with onChange listener and stores the value and sets the value in chrome storage.
+3. When user leaves the password field it takes its value with onChange listener and stores the value and sets the value in chrome storage.
+4. It then takes the value from storage and creates header and then authenticates user with the url specified by the user. If the Login is
+   successful it than stores the token for further processing.
+5. When user clicks the Reload button it creates the authorization header with the value stored in the storage and displays the extensions
+   of particular user. When user selects the extension it takes it value and stores it in the chrome.storage.
+6. It takes the value of the regex from the user and then stores it in the chrome storage.
+7. It takes the value of the Contact Load Url from the user and then stores it in the chrome storage.
+8. It has a checkbox as to search the phone number on new tab, if checked it stores 1 in storage else 0.
+
 
 Chrome Buttons/Actions
 --------------------
 When a user clicks on the browser action i.e extension icon specific functions are performed like it open the popup window by executing the function. On clicking the browser action an event **chrome.browserAction.onClicked.addListener** in background.js will be fired which will execute
-
 a function **launchApplication()** it first checks if there is an existing window , if not it opens this window , but if there is an existing window it rejects the call. 
 
 Settings
 --------
-The settings page consist of :
+When user right click on the extension icon it open the settings page which consist of :
 
-  * Authentication  
-    It takes the credentials from user and on the basis of that authentication result it lets the user use WebRTC phone.
-
-
+**Authentication**  
+It takes the credentials from user and on the basis of that authentication result it lets the user use WebRTC phone.
+ * **Api Server**
+ It takes following parameters from the user:
+ 1. Url
+ 2. Username
+ 3. Password
+ 4. Test
+ * **Agent**
+ 1. Select Extension
+ 2. Auto load Checkbox
+ * **Phone numbers**
+ 1. Search Phone numbers on new tabs Checkbox
+ 2. Phone Pattern
+ * **Contact Load**
+ 1. Contact Load Url
+ 
+ 
 Scenarios
 ---------
+
+### Right click the extension
+
+On right click it will show the following options:
+
+1. Default
+   
+   When this menu is clicked, it has a onclick listener which listens to the onClick event and open the popup window if no window is open.
+   
+2. Search phone number
+   
+   When this menu is clicked, it has a onclick listener which listens to the onClick event and it gets the current tab id and the event
+   **chrome.tabs.sendMessage** will be fired which will send the message to the content script, which will listen to the message through
+   listener **chrome.runtime.onMessage.addListener** and will replace the number with a clickable link.
+   
+3. Settings
+   
+    This is a redirect menu which redirects the user to the settings page, i.e option page and ask for the extension settings.
+    
 
 ### Tab load /Navigate
 
@@ -149,7 +216,7 @@ It will check that if there is any **isRejected** function if yes than it will s
 ### In Call/Active Call
  
 * **Load contact:**  
-It has a button Load contact which upon clicking executes a function **loadContact** that takes the id of that number, stores it and appends i at the end of URL and redirects to the url which has the information of contact and can update the contact details as well.
+When call is connected it takes the value of the remote ID and replaces the **url** with the remoteId. 
 
 * **Call Hangup:**  
 This button ends the call on clicking. The end call button has a listener click which when clicked fires a function **simple.hangup()** in popup.js, and it shows the normal screen.
