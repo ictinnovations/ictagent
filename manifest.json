@@ -1,0 +1,27 @@
+{
+    "name": "A Phone",
+    "manifest_version": 2,
+    "version": "0.1",
+    "description": "WebRTC Phone",
+    "options_ui": {
+    "page": "options.html",
+    "chrome_style": true,
+    "open_in_tab": true
+  },
+
+  "background": {
+    "persistent": true,
+    "scripts": ["jquery-2.2.0.min.js","background.js"]
+  },
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["jquery-2.2.0.min.js","content.js"]
+  }],
+  "browser_action": {
+    "default_title": "WebRTC Phone"
+    
+  },
+
+  "permissions": ["tabs","activeTab","contextMenus","storage"]
+   
+}

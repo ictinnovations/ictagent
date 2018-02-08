@@ -1,0 +1,78 @@
+
+<html>
+    <head>
+      <script src="jquery-2.2.0.min.js"></script>
+      <script src="sip-0.9.1.min.js"></script>
+       <script src="popup.js"></script> 
+       
+    </head>
+    <body>
+    <div id="screennormal">
+    <h4>Dial any Number</h4>
+    <!--  <button id="search" style="background-color:yellow">Search</button><br><br> -->
+     <!--<a href="popup.html" target="_blank">open frame.html in new tab</a><br>!-->
+       <label for="phone_number">Phone Number</label>
+       <input type="text" class="form-control" placeholder="Enter Phone number" id= "phone_number"><br><br>
+       <button id ="call" (onclick)="call()" style="background-color:green"> Call </button><br><br>
+       <audio id="remoteVideo" style="border: 1px solid lightgrey;"></audio>
+       <audio id="localVideo" muted="muted" style=" border: 1px solid lightgrey;"></audio>      
+        <button id="online"> Online</button>
+     <button id="offline"> Offline</button><br><br> 
+
+    
+</div>
+<div id="screendialing">
+<h3>Outgoing Call</h3>
+<p>Caller Number</p>
+<div id ="call_number"></div>
+<button id="endCall" style="background-color: red">End Call</button><br><br>
+</div>
+<div id="screenringing">
+<h3>Incoming Call</h3>
+<p>Caller ID</p>
+<div id="CallerId"></div>
+<button id ="answer" (onclick)="answer" style="background-color:blue"> Answer</button>
+<button id="incoming_endCall" style="background-color: red">Reject</button>
+</div>
+<div id="screencalling">
+<h3>In Call</h3>
+<div id="incallId"></div>
+<button id="hangup" style="background-color: red">Hang Up</button><br><br>
+
+<a  id="lc" target="_blank">Load Contact</a>  
+
+<div><br>
+<select id="picktech">
+<option value="select">Select</option>
+</select>
+</div>
+<br>
+<h8>Send DTMF</h8>
+<table id="keypad" cellpadding="5" cellspacing="2" border="0">
+<tr>
+<td><button id="1" value="1">1</button></td>
+<td><button id="2" value="2">2</button></td>
+<td><button id="3" value="3">3</button></td>
+</tr>
+<tr>
+<td><button id="4" value="4">4</button></td>
+<td><button id="5" value="5">5</button></td>
+<td><button id="6" value="6">6</button></td>
+</tr>
+<tr>
+<td><button id="7" value="7">7</button></td>
+<td><button id="8" value="8">8</button></td>
+<td><button id="9" value="9">9</button></td>
+</tr>
+<tr>
+<td><button id="0" value="0">0</button></td>
+<td><button id="*" value="*">*</button></td>
+<td><button id="#" value="#">#</button></td>
+</tr>
+</table>
+
+</div>
+
+</body>
+
+</html>
