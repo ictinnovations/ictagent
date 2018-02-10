@@ -34,15 +34,17 @@ Once the extension is successfully installed, update the extension settings for 
 - **Authentication**
 
   Enter the Url, Username and Password. If all of these fields are valid then a success message will appear.
+  If an error message displays then again fill the required fields with correct credentials.
   
 - **Select Extension**  
 
   Click Reload to reload the Accounts / Extensions.
-  Select the Extension
+  Select the Extension.
+  Now all inbound and outbound calls will be handled through this Extension.
   
 - **Contact Load Url**
   
-  Enter the Contact Load Url, i.e it will open the contact details when the call is connected.
+  Enter the Contact Load Url i.e the URL of the Customer Relationship management(CRM), so that when the call is connected it will load the particular contact details.
   
 - **Enter Regular Expression**
 
@@ -92,6 +94,7 @@ To answer an inbound Call the **Phone / Popup** must be open. On incoming call i
 
 ### Send DTMF
 
+During surveys and polls when the caller asks you to press the specific key you can use send DTMF buttons to send your response.
 When the Call is connected, a screen will display like this having the option of sending DTMF, Click the button you want to send as DTMF.
 <p align="center">
 ![Screen Calling](screen_calling.png)
