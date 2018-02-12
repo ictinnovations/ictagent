@@ -1,45 +1,72 @@
 
 <html>
     <head>
+    <title>ICT Agent Panel</title>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <script src="jquery-2.2.0.min.js"></script>
       <script src="sip-0.9.1.min.js"></script>
-       <script src="popup.js"></script> 
-       
+       <script src="popup.js"></script>
+       <style>
+       /*
+           body {
+	           background-color:blue; 
+	           font-family:Verdana, Arial, Helvetica, sans-serif;
+	      }
+	      */
+    </style>
     </head>
     <body>
     <div id="screennormal">
-    <h4>Dial any Number</h4>
+      <div class="form-group">
+       <div class="col-sm-6">
     <!--  <button id="search" style="background-color:yellow">Search</button><br><br> -->
-     <!--<a href="popup.html" target="_blank">open frame.html in new tab</a><br>!-->
+    <!-- <a href="btn.html" target="_blank">open frame.html in new tab</a><br> -->
+       <h3 style="color:black" style="font-family:verdana"><b> Dial any Number</b></h3>
        <label for="phone_number">Phone Number</label>
-       <input type="text" class="form-control" placeholder="Enter Phone number" id= "phone_number"><br><br>
-       <button id ="call" (onclick)="call()" style="background-color:green"> Call </button><br><br>
+       <input type="text" class="form-control" placeholder="Enter Phone number" id="phone_number">
+       <div id="fieldempty"></div><br>
+       <button type="button" class="btn btn-success" id ="call" (onclick)="call()" style="font-family:  verdana"><span class="glyphicon glyphicon-earphone"></span>  Call </button><br>
+       <div id="callError"></div><br>
        <audio id="remoteVideo" style="border: 1px solid lightgrey;"></audio>
        <audio id="localVideo" muted="muted" style=" border: 1px solid lightgrey;"></audio>      
-        <button id="online"> Online</button>
-     <button id="offline"> Offline</button><br><br> 
-
-    
+        <button id="online" type="button" class="btn btn-info" style="font-family:verdana"> Online</button>
+     <button id="offline" type="button" class="btn btn-danger" style="font-family:verdana"> Offline</button><br>
+      <div id = "online_error"></div>
+       </div>
+       </div>    
 </div>
 <div id="screendialing">
-<h3>Outgoing Call</h3>
-<p>Caller Number</p>
+<div class="form-group">
+<div class="col-sm-6">
+<h3 style="color:black" style="font-family:verdana"><b>Outgoing Call</b></h3>
+<div>Caller Number</div>
 <div id ="call_number"></div>
-<button id="endCall" style="background-color: red">End Call</button><br><br>
+<button id="endCall" type="button" class="btn btn-danger" style="font-family:verdana">End Call</button><br><br>
+</div>
+</div>
 </div>
 <div id="screenringing">
-<h3>Incoming Call</h3>
-<p>Caller ID</p>
+<div class="form-group">
+<div class="col-sm-6">
+<h3 style="color:black" style="font-family:verdana"><b>Incoming Call</b></h3>
+<div>Caller ID</div>
 <div id="CallerId"></div>
-<button id ="answer" (onclick)="answer" style="background-color:blue"> Answer</button>
-<button id="incoming_endCall" style="background-color: red">Reject</button>
+<button id ="answer" (onclick)="answer" type="button" class="btn btn-success" style="font-family:verdana"> Answer</button>
+<button id="incoming_endCall" type="button" class="btn btn-danger" style="font-family:verdana">Reject</button>
+</div>
+</div>
 </div>
 <div id="screencalling">
-<h3>In Call</h3>
+<div class="form-group">
+<div class="col-sm-6">
+<h3 style="color:black" style="font-family:verdana"><b>In Call</b></h3>
 <div id="incallId"></div>
-<button id="hangup" style="background-color: red">Hang Up</button><br><br>
+<button id="hangup" type="button" class="btn btn-danger">Hang Up</button><br><br>
 
-<a  id="lc" target="_blank">Load Contact</a>  
+<a id="lc" target="_blank">Load Contact</a>
 
 <div><br>
 <select id="picktech">
@@ -48,29 +75,30 @@
 </div>
 <br>
 <h8>Send DTMF</h8>
-<table id="keypad" cellpadding="5" cellspacing="2" border="0">
+<table id="keypad" cellpadding="7" cellspacing="3" border="0">
 <tr>
-<td><button id="1" value="1">1</button></td>
-<td><button id="2" value="2">2</button></td>
-<td><button id="3" value="3">3</button></td>
+<td><button type="button" class="btn btn-primary btn-sm" id="1" value="1">1</button></td>
+<td><button type="button" class="btn btn-primary btn-sm" id="2" value="2">2</button></td>
+<td><button type="button" class="btn btn-primary btn-sm" id="3" value="3">3</button></td>
 </tr>
 <tr>
-<td><button id="4" value="4">4</button></td>
-<td><button id="5" value="5">5</button></td>
-<td><button id="6" value="6">6</button></td>
+<td><button type="button" class="btn btn-primary btn-sm" id="4" value="4">4</button></td>
+<td><button type="button" class="btn btn-primary btn-sm" id="5" value="5">5</button></td>
+<td><button type="button" class="btn btn-primary btn-sm" id="6" value="6">6</button></td>
 </tr>
 <tr>
-<td><button id="7" value="7">7</button></td>
-<td><button id="8" value="8">8</button></td>
-<td><button id="9" value="9">9</button></td>
+<td><button type="button" class="btn btn-primary btn-sm" id="7" value="7">7</button></td>
+<td><button type="button" class="btn btn-primary btn-sm" id="8" value="8">8</button></td>
+<td><button type="button" class="btn btn-primary btn-sm" id="9" value="9">9</button></td>
 </tr>
 <tr>
-<td><button id="0" value="0">0</button></td>
-<td><button id="*" value="*">*</button></td>
-<td><button id="#" value="#">#</button></td>
+<td><button type="button" class="btn btn-primary btn-sm" id="0" value="0">0</button></td>
+<td><button type="button" class="btn btn-primary btn-sm" id="*" value="*">*</button></td>
+<td><button type="button" class="btn btn-primary btn-sm" id="#" value="#">#</button></td>
 </tr>
 </table>
-
+</div>
+</div>
 </div>
 
 </body>

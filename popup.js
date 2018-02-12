@@ -6,10 +6,10 @@ var num;
 var remoteId;
 var extension;
 var settings = {
-    url: 'http://172.17.0.2/ictcore/api',
+    url: 'http://demo.ictcore.org/api',
     username : 'user',
     password : 'user',
-    contact_load : 'www.google.com',
+    contact_load : 'https://www.google.com/search?q=findSomething',
     phone_pattern : '([0-9-()+]{3,20})',
     token : 'abc',
     agent : false,
@@ -44,15 +44,12 @@ function readvalues() {
 
     chrome.storage.sync.get("settings", function(result) {
         settings = result.settings;
-        console.log('============ setting context ===========');
-        console.log(settings);
         url = settings.contact_load;
     });
 
     chrome.storage.sync.get("extension", function(result) {
         if (result.extension !== undefined) {
             extension = result.extension;
-            console.log('============ setting context ===========');
        }
         setup_popup();
         getListItems();
@@ -60,9 +57,6 @@ function readvalues() {
 }
 
 function setup_popup() {
-    console.log(extension);
-    console.log(extension.username);
-    console.log(settings);
     var options = {
     media: {
       local: {
@@ -84,28 +78,21 @@ function setup_popup() {
   
   simple = new SIP.WebRTC.Simple(options);
   
-  simple.on('connecting', function(){
-      $( "div#screennormal" ).hide();
-      $( "div#screencalling" ).hide();
-      $("div#screendialing").show();
-      $("div#screenringing").hide();
-  });
-  
   simple.on('connected', function() {
       $( "div#screennormal" ).hide();
       $( "div#screencalling" ).toggle();
       $("div#screendialing").hide();
       $("div#screenringing").hide();
       remoteId = simple.session.remoteIdentity.friendlyName;
-      console.log(remoteId);
       document.getElementById('incallId').innerHTML=remoteId + ' is in call with you';
-      var conload =  url.replace(/phonenumber/g,remoteId);
+      var conload =  url.replace(/findSomething/g,remoteId);
       document.getElementById("lc").href = conload;
   });
   
   simple.on('ringing', function() {
       $( "div#screennormal" ).toggle();
       $( "div#screenringing" ).toggle();
+      // document.title = "Incoming Call";
       remoteId = simple.session.remoteIdentity.displayName;
       document.getElementById('CallerId').innerHTML=remoteId + ' is calling you';
   });
@@ -114,7 +101,17 @@ function setup_popup() {
       $( "div#screennormal" ).show();
       $("div#screencalling").hide();
       $("div#screenringing").hide();
+      $("div#screendialing").hide();
+      // document.title = "ICT Agent Panel";
   });
+  
+  simple.on('connecting', function() {
+      $( "div#screennormal" ).hide();
+      $( "div#screencalling" ).hide();
+      $("div#screendialing").show();
+      $("div#screenringing").hide();
+  });
+    
 }
 
 navigator.webkitGetUserMedia({
@@ -141,10 +138,21 @@ function do_stuff () {
 
 function myFunction() {
     num = document.getElementById('phone_number').value;
+    if (num == "") {
+        document.getElementById('fieldempty').innerHTML="Please Enter number"; 
+    }
+     if (num !== "") {
+        document.getElementById('fieldempty').innerHTML=""; 
+    }
 }
 
 function onlinefunction() {
-    simple.call(extension.dialplan.agent_login);
+    if (simple == undefined) {
+        document.getElementById('online_error').innerHTML="Please Configure your Phone";
+    }
+    else if (simple !== undefined) {
+        simple.call(extension.dialplan.agent_login);
+    }
 }
 
 
@@ -154,19 +162,28 @@ function offlinefunction() {
 
 
 function call_function () {
-    $( "div#screennormal" ).toggle();
-    $( "div#screendialing" ).toggle();
-    var a = num + '@' + extension.host;
-    console.log(a);
-    document.getElementById('call_number').innerHTML=a;
-    simple.call(a);
+    if (simple !== undefined) {
+        if (num == "") {
+            document.getElementById("callError").innerHTML = "No number to dial";
+        }
+        else if (num !== "") {
+            $( "div#screennormal" ).toggle();
+            $( "div#screendialing" ).toggle();
+            var a = num + '@' + extension.host;
+            document.getElementById('call_number').innerHTML=a;
+            document.getElementById("callError").innerHTML = "";
+            simple.call(a);
+        }
+    }    
+    else if (simple == undefined) {
+        document.getElementById("callError").innerHTML = "Please Configure Phone";
+    }
 }
 
 
 function send_one() {
     simple.session.dtmf(1);
     var one = $(this).val();
-    console.log(one);
 }
 
 function send_two() {
@@ -238,14 +255,12 @@ function hangup_function () {
 
 function redirect_call() {
     var selector = document.getElementById("picktech").value;
-    console.log(selector);
     simple.session.refer(selector);
 }
 
 function getListItems( siteurl, success, failure) {
     var def;
         def  = "Bearer " + settings.token; 
-        console.log(def);
     $.ajax({  
         url: settings.url + "/accounts", 
         method: "GET",  
@@ -256,11 +271,9 @@ function getListItems( siteurl, success, failure) {
         success: function (data) {
             $("#picktech option").remove();
             var result  = JSON.parse(data);  
-            console.log(result);
             var selectInput  = "";       
             for(var i=0; i<result.length; i++) {
                 var selectId= result[i].phone;
-                console.log(selectId);
                 var selectVal= result[i].username + '(' + result[i].phone + ')';   
                 selectInput  = '<option value='+ selectId +'>'+ selectVal +'</option>'; 
                 $('#picktech').append(selectInput);
@@ -279,7 +292,6 @@ chrome.runtime.onMessage.addListener(function(request,sender,sendResponse){
     console.log('I am invoked');
     console.log(res);
     var b = res + '@'+ extension.host;
-    console.log(b);
     document.getElementById('call_number').innerHTML=b;
     simple.call(b);
     sendResponse("hiiiiii");

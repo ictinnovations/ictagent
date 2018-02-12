@@ -3,12 +3,12 @@ update_stop = false;
 var extension = {};
 
 var settings = {
-    url: 'http://172.17.0.2/ictcore/api',
+    url: 'http://demo.ictcore.org/api',
     username: 'user',
     password: 'user',
     token_uptodate: false,
     token: '',
-    contact_load: 'www.google.com',
+    contact_load: 'https://www.google.com/search?q=findSomething',
     phone_pattern: '([0-9-()+]{3,20})',
     agent: false,
     searchphn: false,
@@ -29,10 +29,8 @@ function setup_elements() {
 
 function readvalues() {
     chrome.storage.sync.get('settings', function (result) {
-        console.log(result);
         if (result.settings !== undefined) {
             settings = result.settings;
-            console.log(settings);
         }
         update_stop = true;
         document.getElementById("url").value = settings.url;
@@ -45,12 +43,22 @@ function readvalues() {
         document.getElementById("picktech").value = settings.extension;
         update_stop = false;
     });
+    chrome.storage.sync.get('extension', function (result) {
+         extension = result.extension;
+         if (extension == undefined) {
+             document.getElementById('extension_error').innerHTML = "Please Change Settings and Select Extenison";
+             document.getElementById('extension_error').className += "alert alert-danger";
+         }
+    });      
 }
 function get_account() {
     var def;
     def  = "Bearer " + settings.token; 
-    console.log(def);
     extension = document.getElementById("picktech").value;
+    if (extension !== undefined) {
+        document.getElementById('extension_error').innerHTML = "Settings are updated";
+        document.getElementById('extension_error').className += "alert alert-success";
+    }
     $.ajax({  
         url: settings.url + "/accounts/" + extension + "/provisioning",  
         method: "GET",  
@@ -59,7 +67,6 @@ function get_account() {
             'Content-Type':'application/json'
         },
         success: function(result) {
-            console.log(result);
             extension = JSON.parse(result);
             chrome.storage.sync.set({'extension': extension});
         },
@@ -92,7 +99,6 @@ function save_function() {
         settings.agent = false;
     }
 
-    console.log(settings);
     chrome.storage.sync.set({'settings': settings});
 }
 
@@ -131,10 +137,14 @@ function get_token() {
             settings.token_uptodate = true;
             save_function();
             document.getElementById('status').innerHTML= "Access information tested successfully!";
+            
+            document.getElementById("status").className += "alert alert-success";
+
         },
         error: function () { 
             save_function();
             document.getElementById('status').innerHTML= "Invalid access information";
+            document.getElementById("status").className += "alert alert-danger";
         } 
     }); 
 }
@@ -142,7 +152,6 @@ function get_token() {
 function getListItems( siteurl, success, failure) {
     var def;
         def  = "Bearer " + settings.token; 
-        console.log(def);
     $.ajax({  
         url: settings.url + "/accounts",  
         method: "GET",  
@@ -153,11 +162,9 @@ function getListItems( siteurl, success, failure) {
         success: function (data) {
             $("#picktech option").remove();
             var result  = JSON.parse(data);  
-            console.log(result);
             var selectInput  = "";       
             for(var i=0; i<result.length; i++) {
                 var selectId= result[i].account_id;
-                console.log(selectId);
                 var selectVal= result[i].username + '(' + result[i].phone + ')';   
                 selectInput  = '<option value='+ selectId +'>'+ selectVal +'</option>'; 
                 $('#picktech').append(selectInput);

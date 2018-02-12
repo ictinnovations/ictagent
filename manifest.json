@@ -1,5 +1,5 @@
 {
-    "name": "A Phone",
+    "name": "WebRTC Phone",
     "manifest_version": 2,
     "version": "0.1",
     "description": "WebRTC Phone",
