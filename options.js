@@ -1,6 +1,6 @@
 update_stop = false;
 
-var extension = {};
+var extension;
 
 var settings = {
     url: 'http://demo.ictcore.org/api',
@@ -8,8 +8,8 @@ var settings = {
     password: 'user',
     token_uptodate: false,
     token: '',
-    contact_load: 'https://www.google.com/search?q=findSomething',
-    phone_pattern: '([0-9-()+]{3,20})',
+    contact_load: 'https://www.google.com/search?q={phone_number}',
+    phone_pattern: '([0-9-()+]{6,20})',
     agent: false,
     searchphn: false,
 }
@@ -40,15 +40,22 @@ function readvalues() {
         document.getElementById("conload").value = settings.contact_load;
         document.getElementById("searchphn").checked = settings.searchphn;
         document.getElementById("widgtpop").checked = settings.agent;
-        document.getElementById("picktech").value = settings.extension;
+        // document.getElementById("picktech").value = settings.extension;
+        // console.log(extension);
         update_stop = false;
     });
     chrome.storage.sync.get('extension', function (result) {
-         extension = result.extension;
+         if (result.extension !== undefined) {
+           extension = result.extension;
+           getListItems();
+           document.getElementById("picktech").value = extension.account.account_id;
+        }
          if (extension == undefined) {
              document.getElementById('extension_error').innerHTML = "Please Change Settings and Select Extenison";
              document.getElementById('extension_error').className += "alert alert-danger";
          }
+         // getListItems();
+         //document.getElementById("picktech").value = extension.account.account_id;
     });      
 }
 function get_account() {
@@ -168,6 +175,9 @@ function getListItems( siteurl, success, failure) {
                 var selectVal= result[i].username + '(' + result[i].phone + ')';   
                 selectInput  = '<option value='+ selectId +'>'+ selectVal +'</option>'; 
                 $('#picktech').append(selectInput);
+                if (extension != undefined) {
+                  document.getElementById("picktech").value = extension.account.account_id;
+                }
             }    
        },
        error: function (data) {  

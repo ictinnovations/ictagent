@@ -27,7 +27,7 @@ This extension will embed WebRTC based VoIP Phone in browser which will remain c
 ### Extension Settings
 Once the extension is successfully installed, update the extension settings for this:
 - Right click on the extension icon.
-- A menu will appear like **Default**, **Search Phone numbers**, **Options**.
+- A menu will appear like **Search Phone numbers**, **Options**.
 - Click **Options**.
 - It will redirect you to the Settings page.
 
@@ -70,18 +70,18 @@ If you want to manually search the phone number on the desired page then you can
 ### Open the Web Phone / Popup
 
 - To open the web phone click on the extension icon, it will open the Web Phone Window.
-- Right click the extension icon and select **default** it will also open the **Phone / Popup** Window.
+- Right click the extension icon it will open the **Phone / Popup** Window.
 
 ### Make a Call
 
 - To Call the specific number open the **Popup / Phone** Window.
 - Enter the number in the input field.
 - Click the **Call** button.
-<div style="text-align: center"><img src="normal_screen.png"/></div>
+<div style="text-align: center"><img src="activity1.png"/></div>
 
 ### Click 2 Call
 
-To enable Click 2 Call, enable the auto load popup checkbox. Search Phone number and by clicking any number Phone window will automatically open and will forward the call to the number clicked. OR If the checkbox is not enabled, you can still use this feature by manually opening the Phone window through extension icon in chrome and by clicking the number it will forward call to the number clicked.
+To enable Click 2 Call, enable the auto load popup checkbox. Search Phone number and by clicking any number Phone window will automatically open and will forward the call to the number clicked. OR If the checkbox is not disabled, you can still use this feature by manually opening the Phone window through extension icon in chrome and by clicking the number it will forward call to the number clicked.
 
 ### Answer an inbound Call
 
@@ -89,7 +89,7 @@ To answer an inbound Call the **Phone / Popup** must be open. On incoming call i
 
 
 <p align="center">
-![Screen Ringing](screen_ringing.png)
+![Screen Ringing](activity3.png)
 </p>
 
 ### Send DTMF
@@ -97,21 +97,21 @@ To answer an inbound Call the **Phone / Popup** must be open. On incoming call i
 During surveys and polls when the caller asks you to press the specific key you can use send DTMF buttons to send your response.
 When the Call is connected, a screen will display like this having the option of sending DTMF, Click the button you want to send as DTMF.
 <p align="center">
-![Screen Calling](screen_calling.png)
+![Screen Calling](activity4.2.png)
 </p>
 
 ### Transfer Call
 
 When the call is connected you can also forward it to another agent, a dropdown or a list of agent will appear, select the agent and the call will be connected to that particular agent.
 <p align="center">
-![Screen Calling](screen_calling.png)
+![Screen Calling](activity4.1.png)
 </p>
 
 ### Load the particular Contact
 
-To load the particular contact enter the CRM url in the **Options** page which will redirect you to the partciular contact when the call is connected. So you can load the particular contact details by clicking the contact load link.
+To load the particular contact enter the CRM url in the **Options** page which will redirect you to the partciular contact when the call is connected. Click the number and it will load the particular contact details.
 <p align="center">
-![Screen Calling](screen_calling.png)
+![Screen Calling](activity4.png)
 </p>
 
 
