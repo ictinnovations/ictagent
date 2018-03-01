@@ -1,106 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ICT Agent Panel</title>
 
-<html>
-    <head>
-    <title>ICT Agent Panel</title>
-    <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-      <script src="jquery-2.2.0.min.js"></script>
-      <script src="sip-0.9.1.min.js"></script>
-       <script src="popup.js"></script>
-       <style>
-       /*
-           body {
-	           background-color:blue; 
-	           font-family:Verdana, Arial, Helvetica, sans-serif;
-	      }
-	      */
-    </style>
-    </head>
-    <body>
-    <div id="screennormal">
-      <div class="form-group">
-       <div class="col-sm-6">
-    <!--  <button id="search" style="background-color:yellow">Search</button><br><br> -->
-    <!-- <a href="btn.html" target="_blank">open frame.html in new tab</a><br> -->
-       <h3 style="color:black" style="font-family:verdana"><b> Dial any Number</b></h3>
-       <label for="phone_number">Phone Number</label>
-       <input type="text" class="form-control" placeholder="Enter Phone number" id="phone_number">
-       <div id="fieldempty"></div><br>
-       <button type="button" class="btn btn-success" id ="call" (onclick)="call()" style="font-family:  verdana"><span class="glyphicon glyphicon-earphone"></span>  Call </button><br>
-       <div id="callError"></div><br>
-       <audio id="remoteVideo" style="border: 1px solid lightgrey;"></audio>
-       <audio id="localVideo" muted="muted" style=" border: 1px solid lightgrey;"></audio>      
-        <button id="online" type="button" class="btn btn-info" style="font-family:verdana"> Online</button>
-     <button id="offline" type="button" class="btn btn-danger" style="font-family:verdana"> Offline</button><br>
-      <div id = "online_error"></div>
-       </div>
-       </div>    
-</div>
-<div id="screendialing">
-<div class="form-group">
-<div class="col-sm-6">
-<h3 style="color:black" style="font-family:verdana"><b>Outgoing Call</b></h3>
-<div>Caller Number</div>
-<div id ="call_number"></div>
-<button id="endCall" type="button" class="btn btn-danger" style="font-family:verdana">End Call</button><br><br>
-</div>
-</div>
-</div>
-<div id="screenringing">
-<div class="form-group">
-<div class="col-sm-6">
-<h3 style="color:black" style="font-family:verdana"><b>Incoming Call</b></h3>
-<div>Caller ID</div>
-<div id="CallerId"></div>
-<button id ="answer" (onclick)="answer" type="button" class="btn btn-success" style="font-family:verdana"> Answer</button>
-<button id="incoming_endCall" type="button" class="btn btn-danger" style="font-family:verdana">Reject</button>
-</div>
-</div>
-</div>
-<div id="screencalling">
-<div class="form-group">
-<div class="col-sm-6">
-<h3 style="color:black" style="font-family:verdana"><b>In Call</b></h3>
-<div id="incallId"></div>
-<button id="hangup" type="button" class="btn btn-danger">Hang Up</button><br><br>
+  <!-- Stylesheet -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,400i,700,700i" rel="stylesheet">
+  <link rel="stylesheet" href="./css/normalize.css">
+  <link rel="stylesheet" href="./css/animate.css">
+  <link rel="stylesheet" href="./css/phonicon.css">
+  <link rel="stylesheet" href="./css/app.css">
+  <!--[if gte IE 9]>
+  <style type="text/css">
+    .template.call .c__p .c-p__s-a .s-a__g { filter: none; }
+  </style>
+  <![endif]-->
 
-<a id="lc" target="_blank">Load Contact</a>
+  <!-- Script -->
+  <script src="./js/tippy.all.min.js"></script>
+</head>
+<body>
 
-<div><br>
-<select id="picktech">
-<option value="select">Select</option>
-</select>
-</div>
-<br>
-<h8>Send DTMF</h8>
-<table id="keypad" cellpadding="7" cellspacing="3" border="0">
-<tr>
-<td><button type="button" class="btn btn-primary btn-sm" id="1" value="1">1</button></td>
-<td><button type="button" class="btn btn-primary btn-sm" id="2" value="2">2</button></td>
-<td><button type="button" class="btn btn-primary btn-sm" id="3" value="3">3</button></td>
-</tr>
-<tr>
-<td><button type="button" class="btn btn-primary btn-sm" id="4" value="4">4</button></td>
-<td><button type="button" class="btn btn-primary btn-sm" id="5" value="5">5</button></td>
-<td><button type="button" class="btn btn-primary btn-sm" id="6" value="6">6</button></td>
-</tr>
-<tr>
-<td><button type="button" class="btn btn-primary btn-sm" id="7" value="7">7</button></td>
-<td><button type="button" class="btn btn-primary btn-sm" id="8" value="8">8</button></td>
-<td><button type="button" class="btn btn-primary btn-sm" id="9" value="9">9</button></td>
-</tr>
-<tr>
-<td><button type="button" class="btn btn-primary btn-sm" id="0" value="0">0</button></td>
-<td><button type="button" class="btn btn-primary btn-sm" id="*" value="*">*</button></td>
-<td><button type="button" class="btn btn-primary btn-sm" id="#" value="#">#</button></td>
-</tr>
-</table>
-</div>
-</div>
-</div>
+  <!-- App Container -->
+  <div id="a">
+
+    <!-- Modal -->
+    <div class="a__m">
+      <!-- Modal Head -->
+      <div class="a-m__h">
+        <!-- Client Status -->
+        <div class="m-h__s">
+          <button title="">
+            <span class="offline"></span>
+          </button>
+        </div>
+
+        <!-- Head Title -->
+        <div class="m-h__t">
+          <h1></h1>
+        </div>
+
+        <!-- Modal Close Toggle -->
+        <div class="m-h__c">
+          <button>
+            <i class="phonicon icon-close"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Activity -->
+      <div class="a-m__a">
+        <!-- Idle Screen / Default Startup -->
+        <div class="template idle default" data-template-name="idle">
+          <!-- Phone text field -->
+          <div class="i__f">
+            <input type="text" placeholder="Enter Phone Number" size="10">
+           <audio id="remoteVideo" style="border: 1px solid lightgrey;"></audio> 
+            <audio id="localVideo" muted="muted" style=" border: 1px solid lightgrey;"></audio>
+          </div>
+
+          <!-- Numpad -->
+          <div class="i__n numpad">
+            <div class="i-n__row clearfix">
+              <button class="pull-left" value="1">1</button>
+              <button class="pull-left" value="2">2</button>
+              <button class="pull-left" value="3">3</button>
+            </div>
+            <div class="i-n__row clearfix">
+              <button class="pull-left" value="4">4</button>
+              <button class="pull-left" value="5">5</button>
+              <button class="pull-left" value="6">6</button>
+            </div>
+            <div class="i-n__row clearfix">
+              <button class="pull-left" value="7">7</button>
+              <button class="pull-left" value="8">8</button>
+              <button class="pull-left" value="9">9</button>
+            </div>
+            <div class="i-n__row clearfix">
+              <button class="pull-left" value="*">
+                <i class="phonicon icon-asterisk"></i>
+              </button>
+              <button class="pull-left" value="0">0</button>
+              <button class="pull-left" value="#">
+                <i class="phonicon icon-hashtag"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Page Screen -->
+        <div class="template call incoming hidden" data-template-name="incoming">
+          <div class="c__p">
+            <!-- Progress Label -->
+            <div class="c-p__l">You are receiving call from<br><span>&nbsp;</span></div>
+
+            <!-- Progress Info -->
+            <div class="c-p__i">
+              <!-- Number -->
+              <div class="p-i__n"></div>
+
+              <!-- IP 
+              <div class="p-i__i">
+                <span>@</span>&nbsp;<span class="ip"></span>
+              </div>
+              -->
+            </div>
+          </div>
+        </div>
+
+        <div class="template call outgoing hidden" data-template-name="outgoing">
+          <div class="c__p">
+            <!-- Progress Label -->
+            <div class="c-p__l">Calling...<br><span>&nbsp;</span></div>
+
+            <!-- Progress Info -->
+            <div class="c-p__i">
+              <!-- Number -->
+              <div class="p-i__n"></div>
+
+              <!-- IP
+              <div class="p-i__i">
+                <span>@</span>&nbsp;<span class="ip"></span>
+              </div>
+              -->
+            </div>
+          </div>
+        </div>
+
+        <div class="template call incall hidden" data-template-name="incall">
+          <div class="c__p">
+            <!-- Progress Label -->
+            <div class="c-p__l">You are in a call with<br><span>&nbsp;</span></div>
+            <!-- Progress Info -->
+            <div class="c-p__i">
+              <!-- Number -->
+              <div class="p-i__n"></div>
+              <!-- IP
+              <div class="p-i__i">
+                <span>@</span>&nbsp;<span class="ip"></span>
+              </div>
+               -->
+            </div>
+
+            <!-- Progress Tools -->
+            <div class="c-p__t hidden">
+              <button data-action="transfer">Transfer to...</button>
+              <button data-action="dtmf">Send DTMF</button>
+            </div>
+
+            <!-- Progress Sub Activity -->
+            <div class="c-p__s-a hidden">
+              <div class="s-a__g"></div>
+              <div class="s-a__b">
+                <!-- Transfer -->
+                <div class="s-a-b__t hidden">
+                  <!-- Module -->
+                  <div class="t__m">
+                    <div class="dropdown">
+                      <select>
+                        <option value="121212">Administrator (1)</option>
+                        <option value="232323">Administrator (2)</option>
+                        <option value="343434">Supervisor</option>
+                      </select>
+                    </div>
+                    <button>Start Call Transfer</button>
+                  </div>
+
+                  <!-- Close Trigger -->
+                  <button class="sub-activity-toggle">Cancel</button>
+                </div>
+
+                <!-- DTMF -->
+                <div class="s-a-b__d hidden">
+                  <!-- Module -->
+                  <div class="t__m">
+                    <div class="numpad">
+                      <div class="i-n__row clearfix">
+                        <button class="pull-left" value="1">1</button>
+                        <button class="pull-left" value="2">2</button>
+                        <button class="pull-left" value="3">3</button>
+                      </div>
+                      <div class="i-n__row clearfix">
+                        <button class="pull-left" value="4">4</button>
+                        <button class="pull-left" value="5">5</button>
+                        <button class="pull-left" value="6">6</button>
+                      </div>
+                      <div class="i-n__row clearfix">
+                        <button class="pull-left" value="7">7</button>
+                        <button class="pull-left" value="8">8</button>
+                        <button class="pull-left" value="9">9</button>
+                      </div>
+                      <div class="i-n__row clearfix">
+                        <button class="pull-left" value="*">
+                          <i class="phonicon icon-asterisk"></i>
+                        </button>
+                        <button class="pull-left" value="0">0</button>
+                        <button class="pull-left" value="#">
+                          <i class="phonicon icon-hashtag"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Close Trigger -->
+                  <button class="sub-activity-toggle">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="template offline hidden" data-template-name="offline">
+          <!-- Offline Label -->
+          <div class="o__l">
+            <div class="o-l__s">
+              <i class="phonicon icon-sad"></i>
+            </div>
+            <h2>Uh oh...</h2>
+            <div class="o-l__p">Keep calm everyone… This guy just offline for a while.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Tools -->
+      <div class="a-m__t">
+        <button class="call" data-action="start">
+          <i class="phonicon icon-telephone"></i>
+        </button>
+        <button class="uncall hidden" data-action="stop">
+          <i class="phonicon icon-telephone"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- App Script -->
+  <script src="popup_gui.js"></script>
+  <script src ="popup.js"></script>
+  <script src="jquery-2.2.0.min.js"></script>
+  <script src="sip-0.9.1.min.js"></script>
 
 </body>
-
 </html>

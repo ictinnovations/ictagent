@@ -57,7 +57,11 @@ var no;
 chrome.browserAction.onClicked.addListener(function launchApplication() {
     var newWindow = null;
     if ((newWindow == null) || (newWindow.closed)) 
-        newWindow = window.open('popup.html','testName','width=320,height=320,scrollbars=yes,resizable=yes');
+        newWindow = window.open(
+    "popup.html",
+    "ICT Agent",
+    "width=344,height=580,scrollbars=no,toolbar=no,screenx=0,screeny=0,location=no,titlebar=0,directories=no,status=no,menubar=no"
+  );
         newWindow.focus();
 });
 
@@ -85,7 +89,11 @@ chrome.runtime.onMessage.addListener(
             if (widgt == true) {
                 var newWindow = null;
                 if ((newWindow == null) || (newWindow.closed)) 
-                    newWindow = window.open('popup.html','testName','width=320,height=320,scrollbars=yes,resizable=yes');
+                    newWindow = newWindow = window.open(
+    "popup.html",
+    "ICT Agent",
+    "width=344,height=580,scrollbars=no,toolbar=no,screenx=0,screeny=0,location=no,titlebar=0,directories=no,status=no,menubar=no"
+  );
                     newWindow.focus();
                 }
    sendResponse({farewell: "goodbye"});

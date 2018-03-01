@@ -1,8 +1,8 @@
 {
-    "name": "WebRTC Phone",
+    "name": "ICT Agent",
     "manifest_version": 2,
-    "version": "0.1",
-    "description": "WebRTC Phone",
+    "version": "0.2",
+    "description": "A WebRTC Phone for inbound and outbound calling",
     "options_ui": {
     "page": "options.html",
     "chrome_style": true,
@@ -18,7 +18,7 @@
     "js": ["jquery-2.2.0.min.js","content.js"]
   }],
   "browser_action": {
-    "default_title": "WebRTC Phone"
+    "default_title": "ICT Agent"
     
   },
 
