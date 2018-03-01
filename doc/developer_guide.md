@@ -82,7 +82,7 @@ Manifest file is in JSON format. Using manifest.json we specify basic metadata a
     "scripts": ["jquery-2.2.0.min.js","background.js"]
   },
 2.  **"browser_action"**: {
-    "default_title": "AAA Extension"
+    "default_title": "ICT Agent"
   },
 3.  **"content_scripts"**: [{
     "matches": ["<all_urls>"],
@@ -174,26 +174,23 @@ Popup_gui.js is a javascript file that controls the GUI of the popup and shows t
 17. During incall activity when the DTMF button is pressed an event in the popup_gui.js is triggered which takes the value of the button pressed in the variable and call the action_dtmf to send the number pressed as DTMF.
 18. During incall activity when the number label is clicked an event in the popup_gui.js is triggered which calls the function action_load_contact
 which takes the number and loads the particular contact details.
+19. During outgoing activity when the number label is clicked an event in the popup_gui.js is triggered which calls the function action_load_contact which takes the number and loads the particular contact details.
+20. During incoming activity when the number label is clicked an event in the popup_gui.js is triggered which calls the function action_load_contact which takes the number and loads the particular contact details. 
 
- 
 Scenarios
 ---------
 
 ### Right click the extension
 
 On right click it will show the following options:
-
-1. Default
    
-   When this menu is clicked, it has a onclick listener which listens to the onClick event and open the popup window if no window is open.
-   
-2. Search phone number
+1. Search phone number
    
    When this menu is clicked, it has a onclick listener which listens to the onClick event and it gets the current tab id and the event
    **chrome.tabs.sendMessage** will be fired which will send the message to the content script, which will listen to the message through
    listener **chrome.runtime.onMessage.addListener** and will replace the number with a clickable link.
    
-3. Settings
+2. Settings
    
     This is a redirect menu which redirects the user to the settings page, i.e option page and ask for the extension settings.
     
@@ -258,3 +255,15 @@ This button ends the call on clicking. When this button is clicked it will chang
 
 * **Send DTMF:**  
 When the call is answered it has a send DTMF option, when user clicks this it will show the button, click the button you want to send as DTMF. When any of the button is clicked an event in the popup_gui.js is fired which gets the value of the button clicked and passes the value as an argument to the **action-dtmf** function which in turns sends the DTMF.
+
+### How to package the Source Code
+
+For publishing the extension, firstly zip the folder than
+* Navigate to the [Chrome Web Store](https://chrome.google.com/webstore).
+* Go to the Developer Dashboard.
+* click add new Item.
+* Upload the source code.
+* Fill in all the fields.
+* For fisrt time pay the developer fee of $5.
+* Hit the publish button.
+The Extension will be published.
