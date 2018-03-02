@@ -14,7 +14,6 @@ This extension has following components:
 7. Popup_gui
 
 
-
 Popup Roles and responsibilites
 -------------------------------
 Popup has following components:
@@ -156,25 +155,44 @@ Popup_gui.js is a javascript file that controls the GUI of the popup and shows t
 ### Functions
 
 1. **OpenModal**: When the DOMContentLoaded it call the function openModal which sets the targetActivity idle and shows the Idle screen to the user.
+
 2. **ChangeStatusIndicator**: This function toggles the agent status i.e online and offline.
+
 3. **closeModal**: This function checks that if the currentActivity is idle and the clientStatus is offline, if yes than it calls another function action_close which in turn closes the popup window.
+
 4. **ChangeActivity(methodCaller, actionName)**: This function changes the activity based on the methodCaller and the action button pressed.
+
 5. **CloseIncalltools**: When user closes the transfer tools or dtmf tools than this function is executed which closes the incall tools. OR when the call is ended this function executes which closes all incall tools.
+
 6. **OpenIncalltools**: When the call is answered and if the user presses the transfer or DTMF button it opens the respective tools.
+
 7. **update_extension_list(aExtension)** : When the result of getListItem is successfull than it triggers this function which creates the options of dropdown.
+
 8. **action_answer**: This function answers the inbound call.
+
 9. **action_hangup**: If the targetActivity is idle this function is executed which hang up the call.
+
 10. **action_transfer**: When the start transfer call button is clicked this function executes and transfers the call to the extension selected.
+
 11. **action_dtmf**: When user presses any DTMF key this function executes which sends the DTMF to the remote site.
+
 12. **dial_a_number**: When user clicks on any number than this function triggers which sends the value of the number clicked as argument to the dial_a_number function, which calls a function **changeActivity(callUncallButton, start)** which changes the targetActivity outgoing and makes the call to the number.
+
 13. **event_incomming**: On incoming call this function is executed which in turn asks the changeActivity to set the methodCaller eventRingingInbound and change the targetActivity to incoming and show the respective screen.
+
 14. **event_answer**: When the call is connected this function is triggered, which calls the function changeActivity to set the methodCaller to **eventCallAnswered**, so the targetActivity is set as incall and incall screen is shown to the user.
+
 15. **event_hangup**: When the call is ended this function is triggered, which checks that if the targetActivity is not idle than close all the incall tools and calls the function **changeActivity(callUncallButton, stop)** which changes the targetActivity to idle and show the idle screen to the user.
+
 16. **numpadPress**: During Screen Idle when user enters the number this function is executed which takes the value of the button and sets the idle screen value to the number entered.
+
 17. During incall activity when the DTMF button is pressed an event in the popup_gui.js is triggered which takes the value of the button pressed in the variable and call the action_dtmf to send the number pressed as DTMF.
+
 18. During incall activity when the number label is clicked an event in the popup_gui.js is triggered which calls the function action_load_contact
 which takes the number and loads the particular contact details.
+
 19. During outgoing activity when the number label is clicked an event in the popup_gui.js is triggered which calls the function action_load_contact which takes the number and loads the particular contact details.
+
 20. During incoming activity when the number label is clicked an event in the popup_gui.js is triggered which calls the function action_load_contact which takes the number and loads the particular contact details. 
 
 Scenarios
@@ -190,7 +208,7 @@ On right click it will show the following options:
    **chrome.tabs.sendMessage** will be fired which will send the message to the content script, which will listen to the message through
    listener **chrome.runtime.onMessage.addListener** and will replace the number with a clickable link.
    
-2. Settings
+2. Settings / Options
    
     This is a redirect menu which redirects the user to the settings page, i.e option page and ask for the extension settings.
     
@@ -256,7 +274,7 @@ This button ends the call on clicking. When this button is clicked it will chang
 * **Send DTMF:**  
 When the call is answered it has a send DTMF option, when user clicks this it will show the button, click the button you want to send as DTMF. When any of the button is clicked an event in the popup_gui.js is fired which gets the value of the button clicked and passes the value as an argument to the **action-dtmf** function which in turns sends the DTMF.
 
-### How to package the Source Code
+### How to Publish the Extension
 
 For publishing the extension, firstly zip the folder than
 * Navigate to the [Chrome Web Store](https://chrome.google.com/webstore).
@@ -267,3 +285,6 @@ For publishing the extension, firstly zip the folder than
 * For fisrt time pay the developer fee of $5.
 * Hit the publish button.
 The Extension will be published.
+
+**Note**: If you want to update the extension than updated extension version should be higher than previous one.
+i.e if the old version was 0.1 than new version must be greater than 0.1.

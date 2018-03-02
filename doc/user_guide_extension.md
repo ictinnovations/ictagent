@@ -70,7 +70,7 @@ If you want to manually search the phone number on the desired page then you can
 ### Open the Web Phone / Popup
 
 - To open the web phone click on the extension icon, it will open the Web Phone Window.
-- Right click the extension icon it will open the **Phone / Popup** Window.
+- Enable the checkbox **autoload widget popup** it will automatically open the Popup window when the number is clicked.
 
 ### Make a Call
 
@@ -109,7 +109,9 @@ When the call is connected you can also forward it to another agent, a dropdown 
 
 ### Load the particular Contact
 
-To load the particular contact enter the CRM url in the **Options** page which will redirect you to the partciular contact when the call is connected. Click the number and it will load the particular contact details.
+To load the particular contact enter the CRM url in the **Options** page which will redirect you to the partciular contact when the call is answered. Click the number and it will load the particular contact details.
+
+During Outgoing and incoming call click the number label and it will load the particular contact details.
 <p align="center">
 ![Screen Calling](activity4.png)
 </p>
