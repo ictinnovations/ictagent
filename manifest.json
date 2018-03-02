@@ -1,7 +1,7 @@
 {
     "name": "ICT Agent",
     "manifest_version": 2,
-    "version": "0.4",
+    "version": "0.5",
     "description": "A WebRTC Phone for inbound and outbound calling",
     "options_ui": {
     "page": "options.html",

@@ -40,7 +40,7 @@ function getDOM(value) {
 };
 
 chrome.contextMenus.create({
-    title: "Search phone number",
+    title: "Search phone number in current Tab",
     contexts: ["browser_action"],
     onclick: function() {
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {

@@ -15,7 +15,7 @@
         <div class="form-group">
           <div class="row">
             <div class="col-xs-3">
-              <label for="url">Url:</label>
+              <label for="url">Url of communication Server:</label>
               <input type="text" name="url" id="url" class="form-control">
             </div> 
           </div>
@@ -31,19 +31,16 @@
         </div>
       </form>
       <h5>Select Extension</h5>
-      <div id="divisiondrp">
-        <select id="picktech">
-        </select>
-      </div><br>
-      <button type="button" id="reload" name="relaod" />Reload</button><br><br>
-      <label for="conload">Enter Url to load Contact</label>
+        <select id="picktech"></select>
+      <button type="button" id="reload" name="relaod" />Refresh</button><br><br>
+      <label for="conload">Enter Url to load Information about incoming and outgoing calls: </label>
       <input type="text" class="form-control" id="conload">
       <small>Here the phone_number will be replaced by the Caller number</small><br><br>
-      <label for="phone_pattern">Phone pattern</label>
+      <label for="phone_pattern">Pattern to search phone number in web pages:</label>
       <input type="text" class="form-control" id="phone_pattern"><br>
-      <input type="checkbox" name="searchphn" id="searchphn"> Search Phone on new tabs <br>
+      <input type="checkbox" name="searchphn" id="searchphn"> Search Phone on new web page<br>
       <div id="phnstatus"></div>
-      <input type="checkbox" name="widgtpop" id="widgtpop"> Autoload widget Popup <br>
+      <input type="checkbox" name="widgtpop" id="widgtpop"> Automatically open the Phone widget when user click on phone number <br>
       <div id="widgt"></div>
     </div>
   </body>

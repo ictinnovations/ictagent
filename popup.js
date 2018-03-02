@@ -111,7 +111,7 @@ navigator.webkitGetUserMedia({
 
 function load_contact(phone_number) {
   console.log(phone_number);
-  var conload =  contct_url.replace(/phone_number/g,phone_number);
+  var conload =  contct_url.replace(/{phone_number}/g,phone_number);
   window.open(conload, '_blank');
 }
 

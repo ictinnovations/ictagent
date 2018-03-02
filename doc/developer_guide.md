@@ -27,14 +27,24 @@ Popup.html has several screen which will be displayed depending on their conditi
 Its the very first screen that appears when the user clicks on the browser action i.e on the icon of the extension in toolbar.It has calling functionality. User can dial any number from this screen. 
 
 **Screen Outgoing**  
-This screen appears when a user dials a number and clicks on the call button.It has an end call button.
+This screen appears when a user dials a number and clicks on the call button. It has an end call button.
 
 **Screen Incoming**  
-When the inbound calls come this screen appears , it will have a feature of answering and rejecting it. 
+When the inbound calls come this screen appears, it will have a feature of answering and rejecting it. 
 
 **Screen incall**  
-This screen will be displayed when an inbound call is answered .It has Reject, Transfer,Send DTMF buttons. 
+This screen will be displayed when an inbound call is answered. It has Reject, Transfer, Send DTMF buttons.
 
+**Screen Transfer**
+When user presses the **Transfer to** button during incall screen than it opens the Transfer screen which shows the extension list, start transfer call button and a close button to close the Transfer call screen.
+
+**Screen DTMF**
+When user presses the **Send DTMF** button during incall screen than it opens the DTMF screen which shows the keypad to the user and a close button to close all the DTMF screen.
+
+**Screen Offline**
+
+During idle screen when the user changes the status to the offline this screen is shown.
+ 
 ### Popup.js
 Popup.js is a javascript file that has been integrated with the popup.html. All the buttons in html file perform some task and instructions of carrying that task is given in popup.js. In this case it has all the call related functions like accept ,reject, end,transfer, and send  DTMF.
 
@@ -45,8 +55,9 @@ Popup.js is a javascript file that has been integrated with the popup.html. All 
 3. readvalues
 4. getListItems
 5. load_contact
-6. Chrome.runtime.onMessage.addListener which listens to the value sent as message by background stores the value and passes that value to the call function as an argument, which dials the number.
-7. It gets the value of **contact load Url** from chrome storage and stores it in a global variable for further processing.
+6. It has all the event listeners such as call answered, call ended or ringing.
+7. Chrome.runtime.onMessage.addListener which listens to the value sent as message by background stores the value and passes that value to the call function as an argument, which dials the number.
+8. It gets the value of **contact load Url** from chrome storage and stores it in a global variable for further processing.
 ---
 
 Background responsibilities and functions
@@ -154,11 +165,11 @@ Popup_gui.js is a javascript file that controls the GUI of the popup and shows t
 
 ### Functions
 
-1. **OpenModal**: When the DOMContentLoaded it call the function openModal which sets the targetActivity idle and shows the Idle screen to the user.
+1. **OpenModal**: When the DOMContent is loaded it call the function openModal which shows the Idle screen to the user.
 
 2. **ChangeStatusIndicator**: This function toggles the agent status i.e online and offline.
 
-3. **closeModal**: This function checks that if the currentActivity is idle and the clientStatus is offline, if yes than it calls another function action_close which in turn closes the popup window.
+3. **closeModal**: This function closes the popup window.
 
 4. **ChangeActivity(methodCaller, actionName)**: This function changes the activity based on the methodCaller and the action button pressed.
 
@@ -170,30 +181,29 @@ Popup_gui.js is a javascript file that controls the GUI of the popup and shows t
 
 8. **action_answer**: This function answers the inbound call.
 
-9. **action_hangup**: If the targetActivity is idle this function is executed which hang up the call.
+9. **action_hangup**: When user presses the end call button this function is executed which hang up the call.
 
 10. **action_transfer**: When the start transfer call button is clicked this function executes and transfers the call to the extension selected.
 
-11. **action_dtmf**: When user presses any DTMF key this function executes which sends the DTMF to the remote site.
+11. **action_dtmf**: When user presses any DTMF key this function executes which sends the number pressed as DTMF to the remote site.
 
-12. **dial_a_number**: When user clicks on any number than this function triggers which sends the value of the number clicked as argument to the dial_a_number function, which calls a function **changeActivity(callUncallButton, start)** which changes the targetActivity outgoing and makes the call to the number.
+12. **action_close**: When user clicks the close icon on the right side of screen this function executes which closes the window.
 
-13. **event_incomming**: On incoming call this function is executed which in turn asks the changeActivity to set the methodCaller eventRingingInbound and change the targetActivity to incoming and show the respective screen.
+12. **dial_a_number**: When user clicks on any number than this function triggers which sends the value of the number clicked as argument to the dial_a_number function, which dials the number.
 
-14. **event_answer**: When the call is connected this function is triggered, which calls the function changeActivity to set the methodCaller to **eventCallAnswered**, so the targetActivity is set as incall and incall screen is shown to the user.
+13. **event_incomming**: On incoming call this function is executed which shows the incoming call screen to the user.
 
-15. **event_hangup**: When the call is ended this function is triggered, which checks that if the targetActivity is not idle than close all the incall tools and calls the function **changeActivity(callUncallButton, stop)** which changes the targetActivity to idle and show the idle screen to the user.
+14. **event_answer**: When the call is connected this function is triggered, which shows incall screen to the user.
+
+15. **event_hangup**: When the call is ended this function is triggered, which shows the idle screen to the user.
 
 16. **numpadPress**: During Screen Idle when user enters the number this function is executed which takes the value of the button and sets the idle screen value to the number entered.
 
-17. During incall activity when the DTMF button is pressed an event in the popup_gui.js is triggered which takes the value of the button pressed in the variable and call the action_dtmf to send the number pressed as DTMF.
+17. During incall activity when the number label is clicked the function action_load_contact is executed which takes the number and loads the particular contact details.
 
-18. During incall activity when the number label is clicked an event in the popup_gui.js is triggered which calls the function action_load_contact
-which takes the number and loads the particular contact details.
+18. During outgoing activity when the number label is clicked the function action_load_contact is executed which takes the number and loads the particular contact details.
 
-19. During outgoing activity when the number label is clicked an event in the popup_gui.js is triggered which calls the function action_load_contact which takes the number and loads the particular contact details.
-
-20. During incoming activity when the number label is clicked an event in the popup_gui.js is triggered which calls the function action_load_contact which takes the number and loads the particular contact details. 
+19. During incoming activity when the number label is clicked the function action_load_contact is executed which takes the number and loads the particular contact details.
 
 Scenarios
 ---------
@@ -244,24 +254,24 @@ If the answer button is clicked, it will change the targetActivity to the incall
 If the reject button is clicked it will set the targetActivity idle and will change the screen and also it will call the function **action_hangup** which detects the call status i.e in case of ringing its status is **new** so it wil reject the call.
 
 ### Transfer Call
-When the call is answered it shows **incall** screen which has Hangup,Transfer and send DTMF buttons. When the transfer button is clicked it will show the transfer dropdown. When the **Start Transfer Call** button is clicked, an event in the popup_gui.js is fired which takes the value of selected Extension and calls another function **action-transfer** which transfers the call to the selected Extension.
+When the call is answered it shows **incall** screen which has Hangup,Transfer and send DTMF buttons. When the transfer button is clicked it will show the transfer dropdown. When the **Start Transfer Call** button is clicked, function **action_transfer** is executed which transfers the call to the selected Extension.
 
 ### Dial a number
-A user can dial a number manually by entering the number in input field. When the call button is clicked, it has an event Listener which will take the value of the number and will call the function **changeActivity('callUncallButton')** which detects that if the oldActivity is idle than it makes call to the number and change the targetActivity to the outgoing and also changes the screen. 
+A user can dial a number manually by entering the number in input field. When the call button is clicked, it has an event Listener which will take the value of the number and will call the function **changeActivity('callUncallButton')** which dials the number. 
 
 ### Call Answered
-On incoming call, if the answer button is clicked, it will change the targetActivity to the incall ans will change the screen and also it will call a function **action_answer** in popup_gui.js which will answer the call.
+On incoming call, if the answer button is clicked, it will call a function **action_answer** in popup_gui.js which will answer the call.
 
 ### Call Rejected
-On incoming call, if the reject button is clicked it will set the targetActivity idle and will change the screen and also it will call the function **action_hangup** which detects the call status i.e in case of ringing its status is **new** so it wil reject the call.
+On incoming call, if the reject button is clicked it will call the function **action_hangup** which detects the call status i.e in case of ringing its status is **new** so it wil reject the call.
 
 ### Event Hangup
 
-When the call is ended from the remote site a function simple.on("ended") fires in the popup.js which calls a function **event_hangup** in the popup_gui.js which checks if the targetActivity is not idle than close all dtmf and transfer tools, changeActivity action to the stop and displays the idle screen.
+When the call is ended from the remote site a function simple.on("ended") fires in the popup.js which calls a function **event_hangup** in the popup_gui.js which displays the idle screen.
 
 ### Event Answered
 
-When the call is answered from the remote site a function simple.on("connected") is fired in popup.js which calls a function **event_answer** in the popup_gui.js calls the function changeActivity('eventCallAnswered') and changes the targetActivity as incall and shows the incall screen.
+When the call is answered from the remote site a function simple.on("connected") is fired in popup.js which calls a function **event\_answer** in the **popup\_gui.js** which shows the incall screen.
 
 ### In Call/Active Call
  
@@ -269,10 +279,10 @@ When the call is answered from the remote site a function simple.on("connected")
 When the call is answered, by clicking on the number label it will show the particular contact details.
 
 * **Call Hangup:**  
-This button ends the call on clicking. When this button is clicked it will change the targetActivity to the idle and will show the idle screen and it will also call another function **action_hangup** which ends the call.
+When this button is clicked, function **action_hangup** is executed which ends the call.
 
 * **Send DTMF:**  
-When the call is answered it has a send DTMF option, when user clicks this it will show the button, click the button you want to send as DTMF. When any of the button is clicked an event in the popup_gui.js is fired which gets the value of the button clicked and passes the value as an argument to the **action-dtmf** function which in turns sends the DTMF.
+When the call is answered it has a send DTMF option, when user clicks this it will show the keypad, click the button you want to send as DTMF. When any of the button is clicked the function **action_dtmf** is triggered which in turns sends the DTMF.
 
 ### How to Publish the Extension
 
