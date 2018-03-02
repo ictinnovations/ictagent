@@ -36,7 +36,7 @@ Once the extension is successfully installed, update the extension settings for 
 
 ### Authentication
 
-  Enter the Url, Username and Password. If all of these fields are valid then a success message will appear.
+  Enter the Url of communication server i.e Api Url, Username and Password. If all of these fields are valid then a success message will appear.
   If an error message displays then again fill the required fields with correct credentials.
   
 ### Select Extension  
@@ -44,37 +44,36 @@ Once the extension is successfully installed, update the extension settings for 
   Select the Extension.
   Now all inbound and outbound calls will be handled through this Extension.
   
-- **Contact Load Url**
+### Enter URL to load information of incoming and outgoing caller
   
   Enter the Contact Load Url i.e the URL of the Customer Relationship management(CRM), so that when the call is connected it will load the particular contact details.
   
-- **Enter Regular Expression**
+### Pattern to search phone number in web pages
 
   Enter Phone Regular Expression to match the Phone pattern on the webpage. So that when you search the phone number it will scan the whole web page and will find the numbers that match the phone pattern given as input and will convert all that numbers into the link.
   
-- **Search Phone on new Tab**
+### Search Phone on new web page
 
   If you want to search/scan phone number automatically on the web page, then select the Checkbox.
   
-- **Autoload Widget Popup**
+### Automatically open the Phone widget when user click on phone number
   
-  If you want to auto load the popup window, upon clicking the phone number then select the checkbox.
+  If you want to auto load the popup window, upon clicking the phone number then enable the checkbox.
 
 Scan Phone number
 -----------------
-You can scan/search Phone numbers by Enabling the Search Phone checkbox in the **Options** page.
+You can scan/search Phone numbers by Enabling the **Search Phone on the new web page checkbox** in the **Options** page.
 
 If you want to manually search the phone number on the desired page then you can simply achieve by following these steps:
 
 * Right click the Extension icon.
-* Click **Search Phone Numbers**
+* Click **Search Phone Number in current Tab**
 * It will highlight all the numbres on the page and will make all the numbers clickable.
 
 Open the Web Phone / Popup
 --------------------------
-
 - To open the web phone click on the extension icon, it will open the Web Phone Window.
-- Enable the checkbox **autoload widget popup** in options/settings page it will automatically open the Popup window when the number is clicked.
+- Enable the checkbox **Automatically open the Phone widget** in options/settings page it will automatically open the Popup window when the number is clicked.
 
 Make a Call
 -----------
@@ -98,8 +97,8 @@ You can also open the caller details by clicking the number on the incoming call
 </p>
 
 
-### Send DTMF or Transfer
-
+Send DTMF or Transfer
+--------------------
 When the call is connected, it has the options to both send DTMF or Transfer Call.
 <p align="center">
 ![Screen Calling](activity4.png)
@@ -122,9 +121,9 @@ When the call is connected simply click the Transfer to button, a dropdown or a 
 ![Screen Calling](activity4.1.png)
 </p>
 
-### Load the particular Contact
-
-To load the particular contact enter the CRM url in the **Options** page which will redirect you to the partciular contact when the call is either connecting or connected. Click the number and it will load the particular contact details.
+Load the Contact Information
+--------------------------
+To load the Contact information enter the CRM url in the **Options** page which will load the partciular contact when the call is either connecting or connected. Click the number and it will load the particular contact details.
 
 During Outgoing, incoming and incall click the number label and it will load the particular contact details.
 
