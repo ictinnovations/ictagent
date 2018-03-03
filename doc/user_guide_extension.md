@@ -46,7 +46,7 @@ Once the extension is successfully installed, update the extension settings for 
   
 ### Enter URL to load information of incoming and outgoing caller
   
-  Enter the Contact Load Url i.e the URL of the Customer Relationship management(CRM), so that when the call is connected it will load the particular contact details.
+  Enter Url to load caller information i.e the URL of the Customer Relationship management(CRM), so that when the call is connected it will load the particular contact details.
   
 ### Pattern to search phone number in web pages
 

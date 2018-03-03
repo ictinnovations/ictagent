@@ -105,33 +105,33 @@ We need to define that which page will act as background and also if it depends 
 Options Responsibilities
 -----------------------
 This is a setting page which detects the settings and saves them in the **Chrome Storage**. It asks for the following parametes from the user:
-**Api Server**
+* **Api Server**
+  * API Url
   * Username
   * Password
-  * Url
-  * Test button
-**Agent**
-  * Get the Extenison
-  * Reload Button
-  * Auto load checkbox
-**Phone numbers**
-  * Search Phone on new tabs
-  * Phone pattern
-**Contact Load**
-  * Contact Load Url
+* **Agent**
+  * Get the Extenison from the dropdown.
+  * Refresh Button to refresh the extensions.
+  * Automatically open the Phone widget when user click on phone number.
+* **Phone numbers**
+  * Search Phone on new web page.
+  * Pattern to search phone number in web pages.
+* **Load Contact Details**
+  * Url to load Information about incoming and outgoing calls.
 
 ### Functions
-1. When user enters the url it has onChange listener which gets the value of url and authenticate user with that url.
+1. When user enters the  Api url it has onChange listener which gets the value of url and authenticate user with that url.
 2. When user leaves the username field it takes its value with onChange listener and stores the value and sets the value in chrome storage.
 3. When user leaves the password field it takes its value with onChange listener and stores the value and sets the value in chrome storage.
 4. It then takes the value from storage and creates header and then authenticates user with the url specified by the user. If the Login is
    successful it than stores the token for further processing.
-5. When user clicks the Reload button it creates the authorization header with the value stored in the storage and displays the extensions
+5. When user clicks the Refresh button it creates the authorization header with the value stored in the storage and displays the extensions
    of particular user. When user selects the extension it takes it value and stores it in the chrome.storage.
 6. It takes the value of the regex from the user and then stores it in the chrome storage.
 7. It takes the value of the Contact Load Url from the user and then stores it in the chrome storage.
 8. It has a checkbox as to search the phone number on new tab, if checked it stores 1 in storage else 0.
-
+9. It has read values function which reads the value from the chrome storage and sets the options fields accordingly.
+10. When user clicks on the extension/accounts from the dropdown menu a function in the options.js is triggered which gets the extension value and loads all its details from database and stores it in the chrome storage.
 
 Chrome Buttons/Actions
 --------------------
@@ -144,21 +144,19 @@ When user right click on the extension icon it open the settings page which cons
 
 **Authentication**  
 It takes the credentials from user and on the basis of that authentication result it lets the user use WebRTC phone.
- * **Api Server**
- It takes following parameters from the user:
- 1. Url
- 2. Username
- 3. Password
- 4. Test
- * **Agent**
- 1. Select Extension
- 2. Auto load Checkbox
- * **Phone numbers**
- 1. Search Phone numbers on new tabs Checkbox
- 2. Phone Pattern
- * **Contact Load**
- 1. Contact Load Url
- 
+* **Api Server**
+  * API Url
+  * Username
+  * Password
+* **Agent**
+  * Get the Extenison from the dropdown.
+  * Refresh Button to refresh the extensions.
+  * Automatically open the Phone widget when user click on phone number.
+* **Phone numbers**
+  * Search Phone on new web page.
+  * Pattern to search phone number in web pages.
+* **Load Contact Details**
+  * Url to load Information about incoming and outgoing calls.
 Popup_gui.js Responsibilities
 -------------------
 Popup_gui.js is a javascript file that controls the GUI of the popup and shows the respective screen based on the condition. It is integrated with popup.html. In this case it has all the call related functions like accept ,reject, end,transfer, and send  DTMF. Whenever any of the phone tool is pressed a function in the popup-gui.js is triggered which controls the operation of GUI.
@@ -275,14 +273,14 @@ When the call is answered from the remote site a function simple.on("connected")
 
 ### In Call/Active Call
  
-* **Load contact:**  
+* **Load contact:**
 When the call is answered, by clicking on the number label it will show the particular contact details.
 
-* **Call Hangup:**  
+* **Call Hangup:**
 When this button is clicked, function **action_hangup** is executed which ends the call.
 
-* **Send DTMF:**  
-When the call is answered it has a send DTMF option, when user clicks this it will show the keypad, click the button you want to send as DTMF. When any of the button is clicked the function **action_dtmf** is triggered which in turns sends the DTMF.
+* **Send DTMF:**
+When the call is answered it has a send DTMF option, when user clicks this it will show the keypad, click the button you want to send as DTMF. When any of the button is clicked the function **action_dtmf** is triggered which in turn sends the DTMF.
 
 ### How to Publish the Extension
 
