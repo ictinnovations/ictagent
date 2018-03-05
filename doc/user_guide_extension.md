@@ -6,9 +6,10 @@ This extension will embed WebRTC based VoIP Phone in browser which will remain c
 Features
 --------
 - An Embedded Web Phone.
-- It is OS Portable, we just need a browser.
+- It is Operating System Independent, we just need a browser.
 - Click 2 Call
 - Agent can access contents, contacts and communications from a single application(browser).
+- It will make agent performance much better.
 - It can harvest contacts from random pages / websites/ web applications.
 - CRM Integration
 - Inbound and Outbound Calls
@@ -84,7 +85,7 @@ Make a Call
 
 Click 2 Call
 ------------
-To enable Click 2 Call, enable the auto load popup checkbox. Search Phone number and by clicking any number in the web page Phone window will automatically open and will forward the call to the number clicked. OR If the checkbox is not enabled, you can still use this feature by manually opening the Phone window through extension icon in chrome and by clicking the number it will forward call to the number clicked.
+To enable Click 2 Call, enable **automatically open the Phone widget** checkbox. Search Phone number and by clicking any number in the web page Phone window will automatically open and will forward the call to the number clicked. OR If the checkbox is not enabled, you can still use this feature by manually opening the Phone window through extension icon in chrome and by clicking the number it will forward call to the number clicked.
 
 Answer an inbound Call
 ----------------------
