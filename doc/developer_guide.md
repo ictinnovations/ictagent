@@ -150,6 +150,7 @@ It takes the credentials from user and on the basis of that authentication resul
   * API Url
   * Username
   * Password
+  * Test Credentials button
 * **Agent**
   * Get the Extenison from the dropdown.
   * Refresh Button to refresh the extensions.
