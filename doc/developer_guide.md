@@ -109,6 +109,7 @@ This is a setting page which detects the settings and saves them in the **Chrome
   * API Url
   * Username
   * Password
+  * Test Credentials button
 * **Agent**
   * Get the Extenison from the dropdown.
   * Refresh Button to refresh the extensions.
@@ -124,14 +125,15 @@ This is a setting page which detects the settings and saves them in the **Chrome
 2. When user leaves the username field it takes its value with onChange listener and stores the value and sets the value in chrome storage.
 3. When user leaves the password field it takes its value with onChange listener and stores the value and sets the value in chrome storage.
 4. It then takes the value from storage and creates header and then authenticates user with the url specified by the user. If the Login is
-   successful it than stores the token for further processing.
-5. When user clicks the Refresh button it creates the authorization header with the value stored in the storage and displays the extensions
+   successful it than stores the token for further processing and loads the extensions.
+5. When user clicks the **Test Credentials** button, it takes the value from storage and creates header and then authenticates user with the url specified by the user. If the Login is successful it than stores the token for further processing and loads the extensions.
+6. When user clicks the Refresh button it creates the authorization header with the value stored in the storage and displays the extensions
    of particular user. When user selects the extension it takes it value and stores it in the chrome.storage.
-6. It takes the value of the regex from the user and then stores it in the chrome storage.
-7. It takes the value of the Contact Load Url from the user and then stores it in the chrome storage.
-8. It has a checkbox as to search the phone number on new tab, if checked it stores 1 in storage else 0.
-9. It has read values function which reads the value from the chrome storage and sets the options fields accordingly.
-10. When user clicks on the extension/accounts from the dropdown menu a function in the options.js is triggered which gets the extension value and loads all its details from database and stores it in the chrome storage.
+7. It takes the value of the regex from the user and then stores it in the chrome storage.
+8. It takes the value of the Contact Load Url from the user and then stores it in the chrome storage.
+9. It has a checkbox as to search the phone number on new tab, if checked it stores 1 in storage else 0.
+10. It has read values function which reads the value from the chrome storage and sets the options fields accordingly.
+11. When user clicks on the extension/accounts from the dropdown menu a function in the options.js is triggered which gets the extension value and loads all its details from database and stores it in the chrome storage.
 
 Chrome Buttons/Actions
 --------------------

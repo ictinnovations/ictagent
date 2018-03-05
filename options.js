@@ -18,6 +18,7 @@ function setup_elements() {
     document.getElementById("url").addEventListener("blur", get_token);
     document.getElementById("username").addEventListener("change", get_token);
     document.getElementById("password").addEventListener("change", get_token);
+    document.getElementById("test").addEventListener("click", get_token);
     document.getElementById("conload").addEventListener("change", save_function);
     document.getElementById("phone_pattern").addEventListener("change", save_function);
     document.getElementById("searchphn").addEventListener("change", save_function);
@@ -120,6 +121,7 @@ function get_token() {
     settings.password = document.getElementById("password").value;
     settings.url = document.getElementById("url").value;
     settings.token_uptodate = false;
+    // document.getElementById('test').innerHTML= "Connecting...";
 
     $.ajax
     ({
@@ -143,6 +145,8 @@ function get_token() {
             settings.token = result.token;
             settings.token_uptodate = true;
             save_function();
+            getListItems();
+            
             document.getElementById('status').innerHTML= "Access information tested successfully!";
             
             document.getElementById("status").className += "alert alert-success";

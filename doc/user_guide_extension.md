@@ -1,20 +1,19 @@
 User Guide for ICT Agent(Browser Extension)
 ==========================================
 
-This extension will embed WebRTC based VoIP Phone in browser which will remain connected to the main server, and will be responsible for inbound and outbound calls, transfer calls as well as sending DTMF. It is easy to use and will save a lot of agent time in searching for the desired data.
-
+This extension will embed WebRTC based VoIP Phone in browser which will remain connected to the main server, and will be responsible for inbound and outbound calls, transfer calls as well as sending DTMF. It will fetch contact information automatically from web pages. It will make agent performance much better.
 Features
 --------
 - An Embedded Web Phone.
 - It is Operating System Independent, we just need a browser.
-- Click 2 Call
+- Click 2 Call.
 - Agent can access contents, contacts and communications from a single application(browser).
 - It will make agent performance much better.
 - It can harvest contacts from random pages / websites/ web applications.
-- CRM Integration
-- Inbound and Outbound Calls
-- Call Transfer
-- Send DTMF
+- CRM Integration.
+- Inbound and Outbound Calls.
+- Call Transfer.
+- Send DTMF.
 
 Install the Extension
 ---------------------
@@ -37,11 +36,11 @@ Once the extension is successfully installed, update the extension settings for 
 
 ### Authentication
 
-  Enter the Url of communication server i.e Api Url, Username and Password. If all of these fields are valid then a success message will appear.
+  Enter the Url of communication server i.e Api Url, Username and Password, Test Credentials button. Click the Test Credential button to test your credentials. If all of these fields are valid then a success message will appear and the extensions will be automatically updated.
   If an error message displays then again fill the required fields with correct credentials.
   
 ### Select Extension  
-  If there no extensions in the dropdown than click the Refresh button it will load the extensions.
+  To get the updated list of extensions click the Refresh button it will load the extensions.
   Select the Extension.
   Now all inbound and outbound calls will be handled through this Extension.
   
