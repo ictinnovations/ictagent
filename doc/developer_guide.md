@@ -14,7 +14,7 @@ This extension has following components:
 7. Popup_gui
 
 
-Popup Roles and responsibilites
+Popup Roles and responsibilities
 -------------------------------
 Popup has following components:
 1. Popup.html
@@ -62,7 +62,7 @@ Popup.js is a javascript file that has been integrated with the popup.html. All 
 
 Background responsibilities and functions
 -----------------------------------------
-Background is a javascript file that has the code which controls the behaviour of extension, and performs various functions upon clicking the extension.This page runs in an isolated environment therefore it uses message passing to interact with content and popup.Google has provided APIs for message passing, Live connections have been used as well for the interaction.
+Background is a javascript file that has the code which controls the behavior of extension, and performs various functions upon clicking the extension.This page runs in an isolated environment therefore it uses message passing to interact with content and popup.Google has provided APIs for message passing, Live connections have been used as well for the interaction.
 
 ### Functions
 1. chrome.tabs.onUpdated.addListener has function getTab() which gets the tab id of current web page and sends the messaeg to content script. 
@@ -74,7 +74,7 @@ Background is a javascript file that has the code which controls the behaviour o
 7. It has a function **Chrome.tabs.OnUpdated** listener which is executed when the tab is updated and gets the tab Id and send the message to the content script to search phone numbers on the current tab, if the value of the **searchit** is 1.
 8. It takes the value of the checkbox autoload widget popup and executes the function to load it if and only if the value of checkbox is greater than 1.
 
-Content Responsibilites
+Content Responsibilities
 --------------------
 If an extension wants to alter the web page no file other than content.js has access for altering this page.It can interact with background.js through message passing.
 
@@ -111,17 +111,17 @@ This is a setting page which detects the settings and saves them in the **Chrome
   * Password
   * Test Credentials button
 * **Agent**
-  * Get the Extenison from the dropdown.
+  * Get the Extension from the dropdown.
   * Refresh Button to refresh the extensions.
   * Automatically open the Phone widget when user click on phone number.
 * **Phone numbers**
   * Search Phone on new web page.
   * Pattern to search phone number in web pages.
 * **Load Contact Details**
-  * Url to load Information about incoming and outgoing calls.
+  * URL to load Information about incoming and outgoing calls.
 
 ### Functions
-1. When user enters the  Api url it has onChange listener which gets the value of url and authenticate user with that url.
+1. When user enters the  API URL it has onChange listener which gets the value of url and authenticate user with that URL.
 2. When user leaves the username field it takes its value with onChange listener and stores the value and sets the value in chrome storage.
 3. When user leaves the password field it takes its value with onChange listener and stores the value and sets the value in chrome storage.
 4. It then takes the value from storage and creates header and then authenticates user with the url specified by the user. If the Login is
@@ -159,20 +159,20 @@ It takes the credentials from user and on the basis of that authentication resul
   * Search Phone on new web page.
   * Pattern to search phone number in web pages.
 * **Load Contact Details**
-  * Url to load Information about incoming and outgoing calls.
-Popup_gui.js Responsibilities
+  * URL to load Information about incoming and outgoing calls.
+Po pup_GUI.dis Responsibilities
 -------------------
-Popup_gui.js is a javascript file that controls the GUI of the popup and shows the respective screen based on the condition. It is integrated with popup.html. In this case it has all the call related functions like accept ,reject, end,transfer, and send  DTMF. Whenever any of the phone tool is pressed a function in the popup-gui.js is triggered which controls the operation of GUI.
+Po pup_GUI.dis is a java script file that controls the GUI of the pop up and shows the respective screen based on the condition. It is integrated with pop up.HTML. In this case it has all the call related functions like accept ,reject, end,transfer, and send  MDT. Whenever any of the phone tool is pressed a function in the pop up-gui.dis is triggered which controls the operation of GUI.
 
 ### Functions
 
-1. **OpenModal**: When the DOMContent is loaded it call the function openModal which shows the Idle screen to the user.
+1. **Open Modal**: When the Contentment is loaded it call the function open Modal which shows the Idle screen to the user.
 
-2. **ChangeStatusIndicator**: This function toggles the agent status i.e online and offline.
+2. **Contraindication**: This function toggles the agent status i.e online and offline.
 
-3. **closeModal**: This function closes the popup window.
+3. **close Modal**: This function closes the pop up window.
 
-4. **ChangeActivity(methodCaller, actionName)**: This function changes the activity based on the methodCaller and the action button pressed.
+4. **Change Activity(method Caller, action Name)**: This function changes the activity based on the method Caller and the action button pressed.
 
 5. **CloseIncalltools**: When user closes the transfer tools or dtmf tools than this function is executed which closes the incall tools. OR when the call is ended this function executes which closes all incall tools.
 
@@ -293,7 +293,7 @@ For publishing the extension, firstly zip the folder than
 * click add new Item.
 * Upload the source code.
 * Fill in all the fields.
-* For fisrt time pay the developer fee of $5.
+* For first time pay the developer fee of $5.
 * Hit the publish button.
 The Extension will be published.
 
