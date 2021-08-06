@@ -1,6 +1,6 @@
 ## ICTAgent(Browser Extension)
 
-ICTAgent is browser extesion that will work with all popular browers like chrome , firefox etc and it will make all available contacts click2dial.  This extension will embed WebRTC based VoIP Phone in browser which will remain connected to the main server, and will be responsible for inbound and outbound calls, transfer calls, sending DTMF as well sending Fax. It can harvest contacts from the random pages. Agent can access contents, contacts from a single application. Browser can automatically fetch required URL depending on the course of call. Automatic URL will eliminate any delay which agent take while searching and finding desired data.
+ICTAgent is chrome extesion and when installed it will convert all available contacts as click to dial.  This extension will embed WebRTC based VoIP Phone in browser which will remain connected to the main server, and will be responsible for inbound and outbound calls, transfer calls, sending DTMF as well sending Fax. It can harvest contacts from the random pages. Agent can access contents, contacts from a single application. Browser can automatically fetch required URL depending on the course of call. Automatic URL will eliminate any delay which agent take while searching and finding desired data.
 
 It has Click 2 Call feature, User can click on the number to make call. 
 
