@@ -53,6 +53,7 @@ Once the extension is successfully installed, update the extension settings for 
 
   Enter the Url of communication server i.e Api Url, Username and Password, Test Credentials button. Click the Test Credential button to test your credentials. If all of these fields are valid then a success message will appear and the extensions will be automatically updated.
   If an error message displays then again fill the required fields with correct credentials.
+  here you will find more details in this regard
   
 ### Select Extension  
   To get the updated list of extensions click the Refresh button it will load the extensions.
@@ -227,6 +228,9 @@ NOTE
 -----
 
 Currently ICTAgent supports fax and voice and we have plans to add SMS and WhatsApp functionality soon.
+
+Following is related blog post
+https://www.ictinnovations.com/ict-agent-chrome-extension
 
 ### Credits
 
