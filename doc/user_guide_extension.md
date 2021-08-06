@@ -1,7 +1,18 @@
 User Guide for ICT Agent(Browser Extension)
 ==========================================
 
-This extension will embed WebRTC based VoIP Phone in browser which will remain connected to the main server, and will be responsible for inbound and outbound calls, transfer calls as well as sending DTMF. It will fetch contact information automatically from web pages. It will make agent performance much better.
+ICTAgent is WebRTC based agent panel means it is browser based voip softphone that can be integrated with any third party CRM simply entering the CRM URL, username and password.
+
+It will enable all leads or contact numbers with Click to Call, Click to SMS, Click to Whatsapp or Click to Fax capability,  CRM user will click on any contact number and default communication channel  (Fax,SMS,Whatsapp, Voice ) will be used accordingly,  When user hover mouse  on contact number, there will be option to select any one communications channel or double click to use default communciations channel.
+
+User can click on any number on the webpage and this will present the user with 4 options i.e either they want to connect with them through
+
+1. Call
+2. SMS
+3. Fax
+4. WhatsApp.
+
+It can be integrated with any of the existing CRM.
 
 Install the Extension
 ---------------------
@@ -64,6 +75,24 @@ Open the Web Phone / Popup
 - Enable the checkbox **Automatically open the Phone widget** in options/settings page it will automatically open the Popup window when the number is clicked.
 
 <div style="page-break-after: always;"></div>
+
+Menu
+------
+There are two menus
+
+* **Call**
+
+  Through call menu the user can manage the inbound and outbound calls, send DTMF and transfer the calls.
+  
+  User has both option either click to call or agent has also numeric keypad to dial any contact manually , the said contact will be saved  for future use, during call progress, the agent will have option to accept , reject, send DTMF  or  transfer the call to any available agent
+  
+  <div style="text-align: center"><img src="activity1.png"/></div>
+  
+* **Fax**
+  
+  Through Fax menu the user can manage the inbound and outbound Fax, send fax to a particular number, add the documents as well.
+  
+    <div style="text-align: center"><img src="fax_menu.png"/></div>
 
 Make a Call
 -----------
@@ -144,3 +173,41 @@ Load the Contact Information
 To load the Contact information enter the CRM url in the **Options** page which will load the partciular contact when the call is either connecting or connected. Click the number and it will load the particular contact details.
 
 During Outgoing, incoming and in call click the number label and it will load the particular contact details.
+
+Send Fax
+--------
+
+To send the fax to a particular contact switch to the Fax menu and click on the **Send new fax**. You will see the following interface
+
+<div style="text-align: center"><img src="send_fax.png"/></div>
+
+Here enter title, choose document to sent, select the destination number on which you want to send the fax and press submit button.
+
+It will redirect you to the Outbound fax list and the user can see the status of the fax there.
+
+Add Document
+------------
+
+To add the new document to the ictfax, firstly open the Fax menu and click on the **Add new document**. You will see the following interface
+
+<div style="text-align: center"><img src="add_document.png"/></div>
+
+Here enter the details and click the submit button. New Document will be added successfully
+
+Outbound Fax
+-----------
+
+To see the outbound fax list , open the fax menu and click on the **View Sent Fax**. It will show you the list of all sent faxes
+
+
+Inbound Fax
+-----------
+
+To see the list of received fax, open the fax menu and click on the **View Received Fax**. It will show you the list of all received faxes
+
+Here you can also download the fax document sent by the user.
+
+NOTE
+-----
+
+Currently ICTAgent supports fax and voice and we have plans to add SMS and WhatsApp functionality soon.

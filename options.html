@@ -11,6 +11,7 @@
     <div class="container">
       <div id ="extension_error"></div>
       <h3>Settings</h3>
+      <button style="right: -210px;position: relative;top: 64px;" id="register">Register</button>
       <form name="cookieform" id="login" method="post">
         <div class="form-group">
           <div class="row">
@@ -43,6 +44,14 @@
       <div id="phnstatus"></div>
       <input type="checkbox" name="widgtpop" id="widgtpop"> Automatically open the Phone widget when user click on phone number <br>
       <div id="widgt"></div>
+      <br>
+      <h5>Default communication preference (Double click the number)</h5>
+      <select id="prefer">
+        <option value="voice">Voice</option>
+        <option value="fax">Fax</option>
+        <option value="sms" disabled>SMS</option>
+        <option value="whatsapp" disabled>WhatsApp</option>
+      </select>
     </div>
   </body>
 </html>

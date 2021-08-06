@@ -3,7 +3,7 @@ update_stop = false;
 var extension;
 
 var settings = {
-    url: 'http://demo.ictcore.org/api',
+    url: 'http://crm.ictdialer.com/api',
     username: 'user',
     password: 'user',
     token_uptodate: false,
@@ -12,6 +12,7 @@ var settings = {
     phone_pattern: '([0-9-()+]{6,20})',
     agent: false,
     searchphn: false,
+    call_preference: 'voice',
 }
 
 function setup_elements() {
@@ -24,8 +25,11 @@ function setup_elements() {
     document.getElementById("searchphn").addEventListener("change", save_function);
     document.getElementById("widgtpop").addEventListener("change", save_function);
     document.getElementById("picktech").addEventListener("change", get_account);
+    document.getElementById("prefer").addEventListener("change", save_function);
 
     document.getElementById('reload').addEventListener("click", getListItems);
+    
+    document.getElementById('register').addEventListener("click", register_user);
 }
 
 function readvalues() {
@@ -95,6 +99,7 @@ function save_function() {
     settings.contact_load = document.getElementById("conload").value;
     settings.phone_pattern = document.getElementById("phone_pattern").value;
     settings.searchphn = document.getElementById("searchphn").value;
+    settings.call_preference = document.getElementById("prefer").value;
     if (document.getElementById("searchphn").checked) {
         console.log('I am checked');
         settings.searchphn = true;
@@ -188,6 +193,10 @@ function getListItems( siteurl, success, failure) {
           failure(data);
        }  
   });
+}
+
+function register_user() {
+  window.open('http://service.ictvision.net/');
 }
 
 

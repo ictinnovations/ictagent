@@ -15,6 +15,8 @@ var settings = {
 
 var old;
 var newval;
+var cal_pref;
+
 chrome.storage.sync.get("settings", function(result) {
     settings = result.settings;
 });
@@ -60,7 +62,7 @@ chrome.browserAction.onClicked.addListener(function launchApplication() {
         newWindow = window.open(
     "popup.html",
     "ICT Agent",
-    "width=344,height=580,scrollbars=no,toolbar=no,screenx=0,screeny=0,location=no,titlebar=0,directories=no,status=no,menubar=no"
+    "width=340,height=630,scrollbars=no,toolbar=no,screenx=0,screeny=0,location=no,titlebar=0,directories=no,status=no,menubar=no"
   );
         newWindow.focus();
 });
@@ -71,11 +73,12 @@ chrome.browserAction.onClicked.addListener(function launchApplication() {
 chrome.extension.onRequest.addListener(function(request, sender)
 {
     no = request.message;
+    cal_pref = request.preference;
     setTimeout(myFunction, 1000);
     
 });
 function myFunction() {
-    chrome.runtime.sendMessage({message: no},function(response){
+    chrome.runtime.sendMessage({message: no, preference: cal_pref},function(response){
         console.log(response);
    });
 }
@@ -92,7 +95,7 @@ chrome.runtime.onMessage.addListener(
                     newWindow = newWindow = window.open(
     "popup.html",
     "ICT Agent",
-    "width=344,height=580,scrollbars=no,toolbar=no,screenx=0,screeny=0,location=no,titlebar=0,directories=no,status=no,menubar=no"
+    "width=340,height=630,scrollbars=no,toolbar=no,screenx=0,screeny=0,location=no,titlebar=0,directories=no,status=no,menubar=no"
   );
                     newWindow.focus();
                 }

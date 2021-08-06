@@ -9,6 +9,7 @@
 
   <!-- Stylesheet -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,400i,700,700i" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="./css/normalize.css">
   <link rel="stylesheet" href="./css/animate.css">
   <link rel="stylesheet" href="./css/phonicon.css">
@@ -21,11 +22,292 @@
 
   <!-- Script -->
   <script src="./js/tippy.all.min.js"></script>
+  <script src="jquery-2.2.0.min.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
+
 </head>
+<style>
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #fff;
+  align-content: center;
+  background-color: #0c71c3;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color:#33a4ff;
+  border: solid;
+  cursor: pointer;
+  width: 100px;
+  padding: 14px 10px;
+  transition: 0.3s;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+
+@media only screen and (min-width: 600px) {
+  .tab button {
+  background-color:#33a4ff;
+  border: solid;
+  overflow: hidden;
+  margin-left: 35%;
+  cursor: pointer;
+  position: relative;
+  width: 100px;
+  padding: 14px 10px;
+  transition: 0.3s;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.faxLabel {
+  display: block;
+  color: #ffff;
+  font-size: 40px;
+  font-weight: 800;
+  margin-left: 41%;
+  padding-top: 10px;
+
+}
+
+.docLabel {
+  color: #ffff;
+  margin-left: 35%;
+
+}
+
+.fileClass {
+
+  margin-left: 35%;
+}
+
+.fax_title
+{
+
+	margin-left: 35%;
+}
+
+.ip2 {
+margin-left: 35%; 
+}
+
+.ip3 {
+margin-right: 15%; 
+}
+
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #fff;
+  color: #0c71c3;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #fff;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 16px 22px;
+  border: 1px solid #fff;
+  border-top: none;
+  background-color: #1f9aff;
+  height: 800px;
+}
+
+h3 {
+  text-align: center;
+  color: #ffff;
+}
+
+#dialer_tab {
+  margin-left:130px;
+}
+
+#fax_tab {
+  border: 1px solid white;
+  color: #0c71c3;
+  font-weight: 600;
+  padding-left:1px; 
+  background-color: #fff;
+
+}
+
+a:hover {
+  color: #fff;
+}
+
+.faxLabel {
+  display: block;
+  color: #ffff;
+  font-size: 20px;
+}
+
+.ip2 {
+  border-radius: 25px;
+  border: 1px solid #fff;
+  padding: 24px; 
+  width: 320px;
+  height: 20px;    
+}
+
+.ip3 {
+  border-radius: 25px;
+  border: 3px solid #000;
+  color:#0c71c3;
+  font-weight: 600;
+  padding: 24px; 
+  width: 320px;
+  height: 20px;    
+}
+
+.docLabel {
+  color: #ffff;
+}
+
+.fileClass {
+  border-radius: 25px;
+  border: 3px solid #000;
+  padding: 24px; 
+  width: 320px;
+  height: 20px; 
+  background-color: white;   
+}
+
+
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+#receivedFaxes {
+  overflow-y: scroll;
+  max-height: 580px;
+
+}
+
+#sentFaxes {
+  overflow-y: scroll;
+  max-height: 580px;
+
+}
+
+</style>
 <body>
 
+
+  <div class="tab">
+    <button id="call_tab" class="tablinks" >Call</button>
+    <button id="dialer_tab" class="tablinks" >Fax</button>
+ </div>
+
+  <!--
+  <div id="call_tab" class="tabcontent">
+    <h3>London</h3>
+    <p>London is the capital city of England.</p>
+  </div>
+  !-->
+
+  <div id="dialer" class="tabcontent">
+
+    <div id="faxManagement">
+      <h3>Fax Management</h3>
+      <a id="showsent" href="#" class="faxLabel"><img src="img/sent.png" width="60px" height="60px">  View Sent Fax</a><br>
+      
+      <a id="showreceived" href="#" class="faxLabel"><img src="img/recieved.png" width="60px" height="60px">  View Received fax</a><br>
+      <a id="newfax" href="#" class="faxLabel">
+      <img src="img/sendnew.png" width="60px" height="60px">  Send new Fax</a><br>
+      <a id="newdocument" href="#" class="faxLabel">
+      <img src="img/add.png" width="60px" height="60px">  Add new document</a>
+    </div>
+
+    <div id="newdocumentform">
+      <label id="back2dashboard2" style="float: left;color: #0c71c3;;font-size: 22px; font-weight: 700; background-color: #fff; font-weight: 700; background-color: #fff;  border-style: solid;">Back</label>
+      <h3>Add Document</h3>
+      <br>
+      <label class="docLabel">Document Name:</label><br>
+      <input type="text" id="document_name" class="ip2"/>
+      <label id="doc_name_err"></label>
+      <br><br>
+      <label class="docLabel">Choose File:</label><br>
+      <input type="file" accept=".pdf,.tif,.tiff,.png,.jpg,.jpeg,.xlsx,.xls,.doc,.docx,.ppt,.pptx,.odt,.ods,.odp" name="document_file" id="document_file" class="fileClass"/>
+      <label id="doc_file_err"></label>
+      <br><br>
+      <label class="docLabel">Description:</label><br>
+      <input type="text" id="document_description" class="ip2"/>
+      <br><br><br>
+      <div style="text-align: center;">
+        <button id="submitdocumentform" class="button">Submit</button>
+      </div>
+    </div>
+      
+    <div id="newfaxform">
+      <label id="back2dashboard" style="float: left;color: #0c71c3;;font-size: 22px; font-weight: 700; background-color: #fff;border-style: solid;">Back</label>
+      <h3>Send fax</h3>
+      <br>
+      <label class="docLabel">Title:</label><br>
+      <input type="text" id="fax_title" class="ip2"/>
+      <br><br>
+      <label class="docLabel">Select Document:</label><br>
+      <div style="text-align:center">
+      <select id="select_doc" class="ip3">
+        <option value="-1">Choose document</option>
+        
+      </select>
+      </div>
+      <label id="doc_fax_err"></label>
+      <br>
+      <label class="docLabel">Destination number:</label><br>
+      <input type="text" id="fax_number" class="ip2"/>
+      <label id="phone_err"></label>
+      
+      <label class="docLabel">Retry:</label><br>
+      <div style="text-align:center">
+      <select id="choose_retry" class="ip3" style="text-align:center">
+        <option value="-1">Please select an option</b></option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+      </select>
+      </div>
+      <br>
+      <br>
+      <div style="text-align: center;">
+        <button id="sendfaxbutton" class="button">Submit</button>
+      </div>
+    </div>
+
+    <div id="receivedFaxes">
+      <label id="back2dashboard1" style="float: left;color: #0c71c3;;font-size: 22px; font-weight: 700; background-color: #fff;border-style: solid;">Back</label>
+      <h3>Received Faxes</h3>
+    </div>
+    
+     <div id="sentFaxes">
+      <label id="back2dashboard3" style="float: left;color: #0c71c3;font-size: 22px; font-weight: 700; background-color: #fff;border-style: solid;">Back</label>
+      <h3>Outbound Fax</h3>
+    </div>
+
+  </div>
+  
+  
   <!-- App Container -->
-  <div id="a">
+  <div id="a" >
 
     <!-- Modal -->
     <div class="a__m">
@@ -220,7 +502,7 @@
               <i class="phonicon icon-sad"></i>
             </div>
             <h2>Uh oh...</h2>
-            <div class="o-l__p">Keep calm everyone… This guy just offline for a while.</div>
+            <div class="o-l__p">We are offline</div>
           </div>
         </div>
       </div>
@@ -236,11 +518,30 @@
       </div>
     </div>
   </div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal_title">Modal Header</h4>
+        </div>
+        <div class="modal-body" id="modal_body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 
   <!-- App Script -->
   <script src="popup_gui.js"></script>
   <script src ="popup.js"></script>
-  <script src="jquery-2.2.0.min.js"></script>
   <script src="sip-0.9.1.min.js"></script>
 
 </body>

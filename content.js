@@ -6,6 +6,7 @@ var def;
 var widgt;
 var wigg;
 var value;
+var domUpdate = false;
 
 var settings = {
     url: 'http://demo.ictcore.org/api',
@@ -16,17 +17,36 @@ var settings = {
     token : 'abc',
     agent : false,
     extension : 3,
-    searchphn:false    
+    searchphn:false,
+    call_preference: 'voice'    
 }
 
 function phone_click() {
+    
     event.preventDefault();
-    value = $(this).attr("href");
+    
+    value = $(this).attr('href');
+    console.log(value);
+    
     chrome.runtime.sendMessage({greeting:"Clicked"}, function (response) {
         console.log(response.farewell);
-        chrome.extension.sendRequest({message: value});
+        chrome.extension.sendRequest({message: value, preference: settings.call_preference});
     });
+    
 }
+
+function option_click() {
+    event.preventDefault();
+    
+     var call_prefer = $(this).attr('href');
+     value = $(this).parent()[0].parentElement.childNodes[0].value;
+    
+    chrome.runtime.sendMessage({greeting:"Clicked"}, function (response) {
+        console.log(response.farewell);
+        chrome.extension.sendRequest({message: value, preference: call_prefer});
+    });
+}   
+
 
 chrome.storage.sync.get('settings', function(result) {
     settings = result.settings;
@@ -82,9 +102,25 @@ replaceInElement(document.body, phone_regex, function(match) {
 
         // $('body').html(  $('body').html().replace(phone_regex,'<a href="$1" target="_blank" class="testClick">$1</a>') );
         console.log('I have received messgae from bg');  
+        
+        if (domUpdate == false) {
+        
+           $("a.testClick").wrap("<span class='dropdown'></span>");
+           $( ".dropdown" ).append( "<div class='dropdown-content'><a href='voice' value='voice' class='options'>Voice</a><a href='fax' class='options' value='fax'>Fax</a><a href='voice' class='options' value='sms'>SMS</a><a href='voice' class='options' value='whatsapp'>WhatsApp</a></div>" );
+
+           $('head').append('<style>.dropdown { position: relative;  display: inline-block; } .dropdown-content {display: none;position: absolute;background-color: #ffff;min-width: 160px;box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);padding: 12px 16px;z-index: 1;} .dropdown:hover .dropdown-content { display: block; } .dropdown-content a:hover {background-color: #8AEAF5;}.dropdown-content a {color: black;padding: 12px 16px;text-decoration: none;display: block;text-align: left;}</style>');
+           
+           domUpdate = true;
+          
+        }
+        
+       
+        
+        
         sendResponse("ok");
     }
 
     $(".testClick").click(phone_click); 
-});     
+    $(".options").click(option_click); 
+});        
 
