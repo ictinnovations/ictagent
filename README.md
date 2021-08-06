@@ -230,6 +230,6 @@ Currently ICTAgent supports fax and voice and we have plans to add SMS and Whats
 
 ### Credits
 
-ICT Agent is developed by [ICT Innovations](http://www.ictinnovations.com/)
+ICTAgent is developed by [ICT Innovations](http://www.ictinnovations.com/) and it has been tested with [ICTCRM](http://www.ictcrm.com/) and [ICTCore](http://www.ictcore.org/)
 
 
