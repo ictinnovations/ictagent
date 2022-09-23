@@ -234,6 +234,6 @@ https://www.ictinnovations.com/ict-agent-chrome-extension
 
 ### Credits
 
-ICTAgent is developed by [ICT Innovations](http://www.ictinnovations.com/) and it has been tested with [ICTCRM](https://github.com/ictinnovations/ictcrm/) and [ICTCore](http://www.ictcore.org/)
+ICTAgent is developed by [ICT Innovations](http://www.ictinnovations.com/) and it has been tested with [ICTCRM](https://github.com/ictinnovations/ictcrm/), [ICTFax](https://github.com/ictinnovations/ictcrm/) and [ICTCore](http://www.ictcore.org/)
 
 
